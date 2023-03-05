@@ -1,0 +1,121 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = false
+ScannerTable = Full
+Input = Stream
+Parser = LL
+#RegularDefinitions
+DIGITO:[0-9]
+LETRA:[A-Za-z]
+WS:[\ \t\n\r]
+#Tokens
+:{WS}*
+: / / [^\n]*
+
+identificador: {LETRA} ({LETRA} | {DIGITO})*
+//palavrachave : {LETRA} ({LETRA} | {DIGITO})*
+numero: {DIGITO}+
+
+inicioprograma	= identificador : "iniciop"
+fimprograma	= identificador : "fimp"
+var      	= identificador : "var"
+
+laco     	= identificador : "iniciolaco"
+fimlaco  	= identificador : "fimlaco"
+
+se  	= identificador :"se"
+senao 	= identificador :"senao"
+fimse 	= identificador :"fimse"
+repita   = identificador :"repita"
+escreva  = identificador :"escreva"
+leia     = identificador :"leia"
+
+"("
+")"
+";"
+"="
+"+"
+"-"
+"*"
+"/"
+"<"
+">"
+
+
+#NonTerminals
+<programa>
+<declaracao_recursiva>
+<declaracao>
+<escreva>
+<leia>
+<condicional>
+<se>
+<senao>
+<fimse>
+<laco_repeticao>
+<while>
+<declaracao_var>
+<atribuicao>
+<expressao_basica>
+<operador_basico>
+<id_ou_numero>
+<qualquer_expressao>
+<expressao_logica>
+<operador_logico>
+#Grammar
+<programa>::= inicioprograma <declaracao_recursiva> fimprograma |î
+;
+<declaracao_recursiva>::= <declaracao> <declaracao_recursiva> | î
+;
+
+<declaracao>::= <escreva>
+	      | <leia>
+	      | <condicional>
+	      | <laco_repeticao>
+	      | <declaracao_var>
+	      | <atribuicao>
+;
+<escreva>::= escreva "(" <qualquer_expressao> ")" ";"
+;
+<leia>   ::= leia  "(" identificador ")" ";"
+;
+<condicional>::= <se> <senao> fimse
+;
+<se>::= se "(" <expressao_logica> ")" <declaracao_recursiva>
+;
+<senao> ::= senao <declaracao_recursiva>  | î
+;
+<laco_repeticao>::= <while> fimlaco 
+;
+<while>::= laco "(" <expressao_logica> ")" <declaracao_recursiva>
+;
+<declaracao_var>::= var identificador ";"
+;
+<atribuicao>::= identificador "=" <expressao_basica> ";"
+;
+<expressao_basica>::= identificador <operador_basico>
+		    | numero       <operador_basico>
+		    | "+"          <expressao_basica>
+		    | "-"          <expressao_basica>
+		    | "(" <expressao_basica> ")" <operador_basico>
+;
+
+<operador_basico>::= "+" <expressao_basica>
+		  | "-" <expressao_basica>
+		  | "*" <expressao_basica>
+                    | "/" <expressao_basica>  
+		  | î 
+; 
+<id_ou_numero>::= identificador | numero
+;
+<qualquer_expressao>::= <expressao_basica> 
+;
+<operador_logico>::= "<" | ">" 
+;
+<expressao_logica>::= <id_ou_numero> <operador_logico> <id_ou_numero>
+;
