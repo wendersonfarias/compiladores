@@ -34,6 +34,7 @@ fimse 	= identificador :"fimse"
 repita   = identificador :"repita"
 escreva  = identificador :"escreva"
 leia     = identificador :"leia"
+entao    = identificador :"entao"
 
 "("
 ")"
@@ -68,9 +69,9 @@ leia     = identificador :"leia"
 <expressao_logica>
 <operador_logico>
 #Grammar
-<programa>::= inicioprograma <declaracao_recursiva> fimprograma |Ã®
+<programa>::= inicioprograma <declaracao_recursiva> fimprograma |î
 ;
-<declaracao_recursiva>::= <declaracao> <declaracao_recursiva> | Ã®
+<declaracao_recursiva>::= <declaracao> <declaracao_recursiva> | î
 ;
 
 <declaracao>::= <escreva>
@@ -86,9 +87,9 @@ leia     = identificador :"leia"
 ;
 <condicional>::= <se> <senao> fimse
 ;
-<se>::= se "(" <expressao_logica> ")" <declaracao_recursiva>
+<se>::= se "(" <expressao_logica> ")" entao <declaracao_recursiva>
 ;
-<senao> ::= senao <declaracao_recursiva>  | Ã®
+<senao> ::= senao <declaracao_recursiva>  | î
 ;
 <laco_repeticao>::= <while> fimlaco 
 ;
@@ -109,7 +110,7 @@ leia     = identificador :"leia"
 		  | "-" <expressao_basica>
 		  | "*" <expressao_basica>
                     | "/" <expressao_basica>  
-		  | Ã® 
+		  | î 
 ; 
 <id_ou_numero>::= identificador | numero
 ;
@@ -119,3 +120,7 @@ leia     = identificador :"leia"
 ;
 <expressao_logica>::= <id_ou_numero> <operador_logico> <id_ou_numero>
 ;
+
+
+
+
