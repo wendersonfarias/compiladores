@@ -12,14 +12,17 @@ Parser = LL
 #RegularDefinitions
 DIGITO:[0-9]
 LETRA:[A-Za-z]
-WS:[\ \t\n\r]
+whitespace : [\s\t\n]
+comment    : [\0-\41\43-\255]
+string     : [\0-\9\11-\33\35-\91\93-\255]
 #Tokens
-:{WS}*
+: {whitespace}*
 : / / [^\n]*
 
 identificador: {LETRA} ({LETRA} | {DIGITO})*
 //palavrachave : {LETRA} ({LETRA} | {DIGITO})*
 numero: {DIGITO}+
+string_literal: \" ({string} | \\ \" | \\ {LETRA})* \"
 
 inicioprograma	= identificador : "iniciop"
 fimprograma	= identificador : "fimp"
@@ -44,8 +47,10 @@ entao    = identificador :"entao"
 "-"
 "*"
 "/"
-"<"
+"<="
+">="
 ">"
+"<"
 
 
 #NonTerminals
@@ -68,6 +73,7 @@ entao    = identificador :"entao"
 <qualquer_expressao>
 <expressao_logica>
 <operador_logico>
+<string_expressao>
 #Grammar
 <programa>::= inicioprograma <declaracao_recursiva> fimprograma |î
 ;
@@ -112,11 +118,14 @@ entao    = identificador :"entao"
                     | "/" <expressao_basica>  
 		  | î 
 ; 
+<string_expressao>::= string_literal 
+;
+
 <id_ou_numero>::= identificador | numero
 ;
-<qualquer_expressao>::= <expressao_basica> 
+<qualquer_expressao>::= <expressao_basica> | <string_expressao>
 ;
-<operador_logico>::= "<" | ">" 
+<operador_logico>::= "<=" | ">=" | ">" | "<" 
 ;
 <expressao_logica>::= <id_ou_numero> <operador_logico> <id_ou_numero>
 ;
