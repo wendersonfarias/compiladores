@@ -24,20 +24,20 @@ identificador: {LETRA} ({LETRA} | {DIGITO})*
 numero: {DIGITO}+
 string_literal: \" ({string} | \\ \" | \\ {LETRA})* \"
 
-inicioprograma	= identificador : "iniciop"
-fimprograma	= identificador : "fimp"
+inicioprograma	= identificador : "INICIOP"
+fimprograma	= identificador : "FIMP"
 var      	= identificador : "var"
 
 laco     	= identificador : "iniciolaco"
 fimlaco  	= identificador : "fimlaco"
 
-se  	= identificador :"se"
-senao 	= identificador :"senao"
-fimse 	= identificador :"fimse"
-repita   = identificador :"repita"
-escreva  = identificador :"escreva"
-leia     = identificador :"leia"
-entao    = identificador :"entao"
+se  		= identificador :"se"
+senao 		= identificador :"senao"
+fimse 		= identificador :"fimse"
+escreva 		= identificador :"escreva"
+leia     	= identificador :"leia"
+entao    	= identificador :"entao"
+
 
 "("
 ")"
@@ -51,6 +51,7 @@ entao    = identificador :"entao"
 ">="
 ">"
 "<"
+"=="
 
 
 #NonTerminals
@@ -74,6 +75,7 @@ entao    = identificador :"entao"
 <expressao_logica>
 <operador_logico>
 <string_expressao>
+<expressao_e_ou>
 #Grammar
 <programa>::= inicioprograma <declaracao_recursiva> fimprograma |î
 ;
@@ -125,10 +127,11 @@ entao    = identificador :"entao"
 ;
 <qualquer_expressao>::= <expressao_basica> | <string_expressao>
 ;
-<operador_logico>::= "<=" | ">=" | ">" | "<" 
+<operador_logico>::= "<=" | ">=" | ">" | "<" | "=="
 ;
-<expressao_logica>::= <id_ou_numero> <operador_logico> <id_ou_numero>
+<expressao_logica>::= <id_ou_numero> <operador_logico> <id_ou_numero> 
 ;
+
 
 
 
