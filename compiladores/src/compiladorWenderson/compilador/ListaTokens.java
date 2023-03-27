@@ -11,10 +11,10 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 
-public class listaTokens {
+public class ListaTokens {
 	
 	static void listaToken() throws IOException {
-			InputStream fis =  new FileInputStream("lorem.txt");
+			InputStream fis =  new FileInputStream("tabela_simbolo.txt");
 			Reader isr = new InputStreamReader(fis);
 			BufferedReader br = new BufferedReader(isr);
 			

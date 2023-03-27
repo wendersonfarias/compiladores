@@ -3,13 +3,16 @@ package compiladorWenderson.compilador;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import compiladorWenderson.compilador.lexico.AnalisadorLexico;
+
 public class Compilador {
 
 	public static void main(String[] args) throws IOException {
 		String arquivo = ""  ;
+		Boolean EscrevelistaTokens = false;
 		for (String arg : args) {
             if (arg.equals("-lt")) {
-            	//listaTokens.listaToken();
+            	EscrevelistaTokens = true;
             }
             if(arg.contains("txt")) {
             	 arquivo = arg;
@@ -31,7 +34,9 @@ public class Compilador {
 		
 		
 		
-	
+		if(EscrevelistaTokens) {
+			ListaTokens.listaToken();
+		}
 			
 		
 		

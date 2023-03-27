@@ -1,7 +1,1 @@
-INICIOP
-var teste;
-teste = 2;
-if ( teste > 1 ) entao
-	escreva(teste);
-fimse
-FIMP
+P p   d dd dd8/

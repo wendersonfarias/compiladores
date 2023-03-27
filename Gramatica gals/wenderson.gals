@@ -14,18 +14,18 @@ DIGITO:[0-9]
 LETRA:[A-Za-z]
 whitespace : [\s\t\n]
 comment    : [\0-\41\43-\255]
-string     : [\0-\9\11-\33\35-\91\93-\255]
+
 #Tokens
 : {whitespace}*
 : / / [^\n]*
 
 identificador: {LETRA} ({LETRA} | {DIGITO})*
-//palavrachave : {LETRA} ({LETRA} | {DIGITO})*
-numero: {DIGITO}+
-string_literal: \" ({string} | \\ \" | \\ {LETRA})* \"
 
-inicioprograma	= identificador : "INICIOP"
-fimprograma	= identificador : "FIMP"
+numero: {DIGITO}+
+
+
+inicioprograma	= identificador : "iniciop"
+fimprograma	= identificador : "fimp"
 var      	= identificador : "var"
 
 laco     	= identificador : "iniciolaco"
@@ -38,10 +38,6 @@ escreva 		= identificador :"escreva"
 leia     	= identificador :"leia"
 entao    	= identificador :"entao"
 
-
-"("
-")"
-";"
 "="
 "+"
 "-"
@@ -52,6 +48,9 @@ entao    	= identificador :"entao"
 ">"
 "<"
 "=="
+"("
+")"
+";"
 
 
 #NonTerminals
@@ -63,7 +62,6 @@ entao    	= identificador :"entao"
 <condicional>
 <se>
 <senao>
-<fimse>
 <laco_repeticao>
 <while>
 <declaracao_var>
@@ -74,12 +72,16 @@ entao    	= identificador :"entao"
 <qualquer_expressao>
 <expressao_logica>
 <operador_logico>
-<string_expressao>
-<expressao_e_ou>
+<termo>
+<expressao_basica2>
+<operador_soma>
+<fator>
+<termo2>
+<operador_mult>
 #Grammar
-<programa>::= inicioprograma <declaracao_recursiva> fimprograma |î
+<programa>::= inicioprograma <declaracao_recursiva> fimprograma | î
 ;
-<declaracao_recursiva>::= <declaracao> <declaracao_recursiva> | î
+<declaracao_recursiva>::= <declaracao> <declaracao_recursiva> |  î
 ;
 
 <declaracao>::= <escreva>
@@ -97,7 +99,7 @@ entao    	= identificador :"entao"
 ;
 <se>::= se "(" <expressao_logica> ")" entao <declaracao_recursiva>
 ;
-<senao> ::= senao <declaracao_recursiva>  | î
+<senao> ::= senao <declaracao_recursiva>  |  î
 ;
 <laco_repeticao>::= <while> fimlaco 
 ;
@@ -107,30 +109,33 @@ entao    	= identificador :"entao"
 ;
 <atribuicao>::= identificador "=" <expressao_basica> ";"
 ;
-<expressao_basica>::= identificador <operador_basico>
-		    | numero       <operador_basico>
-		    | "+"          <expressao_basica>
-		    | "-"          <expressao_basica>
-		    | "(" <expressao_basica> ")" <operador_basico>
-;
-
-<operador_basico>::= "+" <expressao_basica>
-		  | "-" <expressao_basica>
-		  | "*" <expressao_basica>
-                    | "/" <expressao_basica>  
-		  | î 
-; 
-<string_expressao>::= string_literal 
-;
 
 <id_ou_numero>::= identificador | numero
 ;
-<qualquer_expressao>::= <expressao_basica> | <string_expressao>
+<qualquer_expressao>::= <expressao_basica>
 ;
 <operador_logico>::= "<=" | ">=" | ">" | "<" | "=="
 ;
 <expressao_logica>::= <id_ou_numero> <operador_logico> <id_ou_numero> 
 ;
+
+<expressao_basica>::= <termo> <expressao_basica2>
+;
+<expressao_basica2>::= <operador_soma> <termo> <expressao_basica2> | î
+;
+<termo>::= <fator> <termo2>
+;
+<termo2>::= <operador_mult> <fator> <termo2> | î
+;
+
+<fator>::= identificador | numero | "(" <expressao_basica> ")"
+;
+
+<operador_soma>::= "+" | "-"
+;
+<operador_mult>::= "*" | "/"
+;
+
 
 
 
