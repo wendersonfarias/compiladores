@@ -1,4 +1,4 @@
-package compiladorWenderson.compilador;
+package compiladorWenderson.compilador.lexico;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,7 +13,7 @@ import java.io.Writer;
 
 public class ListaTokens {
 	
-	static void listaToken() throws IOException {
+	public static void listaToken() throws IOException {
 			InputStream fis =  new FileInputStream("tabela_simbolo.txt");
 			Reader isr = new InputStreamReader(fis);
 			BufferedReader br = new BufferedReader(isr);

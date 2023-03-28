@@ -5,7 +5,5 @@ se ( numero > 6 ) entao
 	iniciolaco 1 < 2 
 		escreva ( 1 );
 	fimlaco
-senao 
-	escreva (2);
 fimse
 fimp

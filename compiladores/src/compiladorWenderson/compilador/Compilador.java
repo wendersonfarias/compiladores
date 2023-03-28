@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import compiladorWenderson.compilador.lexico.AnalisadorLexico;
+import compiladorWenderson.compilador.lexico.ListaTokens;
 
 public class Compilador {
 
@@ -35,6 +36,7 @@ public class Compilador {
 		
 		
 		if(EscrevelistaTokens) {
+			System.out.println("TOKEN { lexema } (Linha - Coluna) \n");
 			ListaTokens.listaToken();
 		}
 			

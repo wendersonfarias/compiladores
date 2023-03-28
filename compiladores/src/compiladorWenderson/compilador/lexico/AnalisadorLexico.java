@@ -14,7 +14,6 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
 
-import compiladorWenderson.compilador.ListaTokens;
 import compiladorWenderson.compilador.lexico.enuns.EnumCaracteres;
 
 public class AnalisadorLexico {
@@ -91,78 +90,127 @@ public class AnalisadorLexico {
 
 	private void estadoQ0() {
 		Character pulaLinha = Character.valueOf('\n');
+		Character charBarrat = Character.valueOf('\t');
+		String barraT = charBarrat.toString();
 		String fimLinha = pulaLinha.toString();
 		String letra = obterCharacter();
 		
 		if("i".equals(letra)) {
 			this.estadoQ1();
 		}
-		if("f".equals(letra)) {
+		else if("f".equals(letra)) {
 			this.estadoQ8();
 		}
-		if("s".equals(letra)) {
+		else if("s".equals(letra)) {
 			this.estadoQ13();
 		}
-		if("e".equals(letra)) {
+		else if("e".equals(letra)) {
 			this.estadoQ15();
 		}
-		if("l".equals(letra)) {
+		else if("l".equals(letra)) {
 			this.estadoQ34();
 		}
-		if("v".equals(letra)) {
+		else if("v".equals(letra)) {
 			this.estadoQ52();
 		}
-		if("=".equals(letra)) {
-			/*if (caractere == '=') {
-			    if (proximoCaractere == '=') {
-			        // reconhece "=="
-			    } else {
-			        // reconhece "="
-			    }
-			}*/
-
+		else if(letra.equals("=") ){ 
 			this.estadoQ64();
 		}
-		if(">".equals(letra)) {
+		else if(letra.equals(">")) {
 			this.estadoQ56();
 		}
-		if("<".equals(letra)) {
+		else if(letra.equals("<")) {
 			this.estadoQ57();
 		}
-		if("/".equals(letra)) {
+		else if(letra.equals("/")) {
 			this.estadoQ60();
 		}
-		if("*".equals(letra)) {
+		else if(letra.equals("*")) {
 			this.estadoQ61();
 		}
-		if("+".equals(letra)) {
+		else if(letra.equals("+")) {
 			this.estadoQ62();
 		}
-		if("-".equals(letra)) {
+		else if(letra.equals("-")) {
 			this.estadoQ63();
 		}
-		if(";".equals(letra)) {
+		else if(letra.equals(";")) {
 			this.estadoQ65();
 		}
-		if(")".equals(letra)) {
+		else if(letra.equals(")")) {
 			this.estadoQ66();
 		}
-		if("(".equals(letra)) {
+		else if(letra.equals("(")) {
 			this.estadoQ67();
-		}else if(letra.equals(fimLinha) ){
-			this.setLexema("");
 		
-		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+		}else if( Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
+		}else if(letra.matches("\\d+")) {
+			this.estadoQ71();
+		}else if(letra.equals("\t")) {
+			this.setLexema("");
+			estadoQ0();
 		}else if(letra.equals(" ")) {
 			this.setLexema("");
 			estadoQ0();
-		}
-		else { 
-			System.out.print("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter  "+  letra +  "Inesperado" );
+		}else if(letra.equals(fimLinha) ){
+			this.setLexema("");
+			return;
 		
 		}
+		else { 
+			System.out.print("Erro Léxico (L" +  this.getNumeroLinha() + " - C" 
+										+ getCabeca() +"): Caracter { "+  letra +  " } Inesperado \n" );
+			this.setLexema("");
+			this.estadoQ0();
+		}
+	}
+
+
+
+	private void estadoQ71() {
+		String letra = obterCharacter();
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		
+		if(letra.matches("\\d+")) {  //verifica se é um numero
+			this.estadoQ71();
+		}else if(letra.equals(fimLinha)) {
+			if(this.getLexema().length() > 0) {
+				this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			}
+			String newToken = "numero { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "numero { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "numero { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+			
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "identificador { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+		}
+		
 	}
 
 
@@ -179,20 +227,20 @@ public class AnalisadorLexico {
 			if(this.getLexema().length() > 0) {
 				this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			}
-			String newToken = "id { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "id { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			//termina a linha e reconhece o token
 		}else if(letra.equals(" ")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "id { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "id { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
 		}else if(verificaCaractereEspecial(letra)) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "id { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "id { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
@@ -202,10 +250,10 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 			
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "identificador { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "identificador { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
@@ -218,55 +266,478 @@ public class AnalisadorLexico {
 
 
 	private void estadoQ66() {
-		 
+		//Reconhece comando  [ ) ]
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = ") { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = ") { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = ") { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		 	 
 		
 	}
 
 
 
 	private void estadoQ67() {
-		 
+		//Reconhece comando  [ ( ]
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "( { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "( { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "( { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		 	 
 		
 	}
 
 
 
 	private void estadoQ65() {
-		 
+		//Reconhece comando  [ ; ]
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "; { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "; { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "; { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		 	 
 		
 	}
 
 
 
 	private void estadoQ64() {
-		 
+		//Reconhece comando  - = ou tenta reconhecer == -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		if(letra.equals("=")) {
+			estadoQ70();
+		
+		}
+		else if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		
+		
+		
+		
+	}
+
+
+
+	private void estadoQ68() {
+		//Reconhece comando  - >= -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = ">= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = ">= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = ">= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.estadoQ12();
+		}
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		
+		
+	}
+
+
+
+	private void estadoQ70() {
+		//Reconhece comando  - == -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		if(letra.equals(fimLinha)) {
+			String newToken = "== { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "== { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "== { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.estadoQ12();
+		}
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
 		
 	}
 
 
 
 	private void estadoQ63() {
-		 
+		//Reconhece comando  [ - ]
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "- { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "- { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "- { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		  
 		
 	}
 
 
 
 	private void estadoQ62() {
-		 
+		//Reconhece comando  - + -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "+ { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "+ { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "+ { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		 		 
 		
 	}
 
 
 
 	private void estadoQ61() {
-		 
+		//Reconhece comando  - * -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "* { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "* { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "* { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		  
 		
 	}
 
 
 
 	private void estadoQ57() {
+		//Reconhece comando  - [ < ou tenta reconhecer <= }
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		if(letra.equals("=")) {
+			estadoQ69();
+		
+		}
+		else if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "< { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "< { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "< { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
+		
+		 
+		
+	}
+
+
+
+	private void estadoQ69() {
+		//Reconhece comando  [ <=]
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "<= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "<= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "<= { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
 		 
 		
 	}
@@ -274,6 +745,42 @@ public class AnalisadorLexico {
 
 
 	private void estadoQ60() {
+		//Reconhece comando  - / -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		
+		 if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			String newToken = "/ { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "/ { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "/ { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+			linhasTokens.add(newToken);
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderá ser um outro token
+		}
+		
+		else { 
+			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+		}
+		
 		 
 		
 	}
@@ -281,16 +788,51 @@ public class AnalisadorLexico {
 
 
 	private void estadoQ56() {
-		 
 		
+		//Reconhece comando  - > ou tenta reconhecer >= -
+				Character pulaLinha = Character.valueOf('\n');
+				String fimLinha = pulaLinha.toString();
+				String letra = obterCharacter();
+				
+				if(letra.equals("=")) {
+					estadoQ68();
+				
+				} 
+				else if(letra.equals(fimLinha)) {
+					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+					String newToken = "> { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+					linhasTokens.add(newToken);
+					this.setLexema("");
+					this.estadoQ0();
+
+					//termina a linha e reconhece o token
+				}else if(letra.equals(" ")) {
+					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+					String newToken = "> { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+					linhasTokens.add(newToken);
+					this.setLexema("");
+					this.estadoQ0();
+					//reconhece um novo token e continua a reconhcer outro token
+				}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+					String newToken = "> { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
+					linhasTokens.add(newToken);
+					this.setLexema("");
+					setCabeca(getCabeca() - 1); 
+					this.estadoQ0();
+					//reconhece um novo token e continua a reconhcer outro token
+					//volta a cabeca porque o proximo poderá ser um outro token
+				}
+				
+				else { 
+					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
+				}	
 	}
 
 
 
-	private void estadoQ55() {
-		 
-		
-	}
+	
 
 
 
@@ -307,7 +849,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -327,7 +869,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -341,20 +883,20 @@ public class AnalisadorLexico {
 		String letra = obterCharacter();
 		
 		if(letra.equals(fimLinha)) {
-			String newToken = "var { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "var { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			//termina a linha e reconhece o token
 		}else if(letra.equals(" ")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "var { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "var { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
 		}else if(verificaCaractereEspecial(letra)) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "var { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "var { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
@@ -367,7 +909,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 		
@@ -388,7 +930,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -408,7 +950,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -428,7 +970,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -442,20 +984,20 @@ public class AnalisadorLexico {
 		String letra = obterCharacter();
 		
 		if(letra.equals(fimLinha)) {
-			String newToken = "leia { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "leia { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			//termina a linha e reconhece o token
 		}else if(letra.equals(" ")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "leia { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "leia { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
 		}else if(verificaCaractereEspecial(letra)) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "leia { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "leia { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
@@ -468,7 +1010,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 		
@@ -493,7 +1035,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -513,7 +1055,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -533,7 +1075,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -553,7 +1095,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -567,20 +1109,21 @@ public class AnalisadorLexico {
 		String letra = obterCharacter();
 		
 		if(letra.equals(fimLinha)) {
-			String newToken = "entao { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "entao { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			//termina a linha e reconhece o token
 		}else if(letra.equals(" ")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "entao { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "entao { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
 		}else if(verificaCaractereEspecial(letra)) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "entao { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "entao { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
@@ -593,7 +1136,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		 
 		
@@ -614,7 +1157,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -634,7 +1177,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -654,7 +1197,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -674,7 +1217,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -694,7 +1237,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -708,20 +1251,20 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "escreva { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "escreva { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "escreva { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "escreva { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "escreva { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "escreva { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -734,7 +1277,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -754,7 +1297,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -774,7 +1317,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -788,20 +1331,20 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "else { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "else { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "else { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "else { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "else { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "else { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -814,7 +1357,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -834,7 +1377,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -848,20 +1391,20 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "se { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "se { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "se { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "se { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "se { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "se { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -874,7 +1417,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -894,7 +1437,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -914,7 +1457,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -938,7 +1481,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -958,7 +1501,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -978,7 +1521,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -998,7 +1541,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1012,20 +1555,20 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "fimlaco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimlaco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "fimlaco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimlaco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "fimlaco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimlaco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -1038,7 +1581,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -1058,7 +1601,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1072,20 +1615,21 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "fimse { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+					String newToken = "fimse { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "fimse { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimse { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "fimse { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimse { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -1098,7 +1642,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -1112,20 +1656,21 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "fimp { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+					String newToken = "fimp { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "fimp { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimp { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "fimp { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "fimp { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -1138,7 +1683,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -1158,7 +1703,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1178,7 +1723,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1198,7 +1743,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1218,7 +1763,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1240,7 +1785,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1260,7 +1805,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1280,7 +1825,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1300,7 +1845,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1314,20 +1859,20 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				
 				if(letra.equals(fimLinha)) {
-					String newToken = "laco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "laco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					//termina a linha e reconhece o token
 				}else if(letra.equals(" ")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "laco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "laco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
 				}else if(verificaCaractereEspecial(letra)) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-					String newToken = "laco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+					String newToken = "laco { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 					linhasTokens.add(newToken);
 					this.setLexema("");
 					setCabeca(getCabeca() - 1); 
@@ -1340,7 +1885,7 @@ public class AnalisadorLexico {
 				}
 				else { 
 					System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-												+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+												+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 				}
 		
 	}
@@ -1361,7 +1906,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 	}
@@ -1375,20 +1920,21 @@ public class AnalisadorLexico {
 		String letra = obterCharacter();
 		
 		if(letra.equals(fimLinha)) {
-			String newToken = "iniciop { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			String newToken = "iniciop { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			//termina a linha e reconhece o token
 		}else if(letra.equals(" ")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "iniciop { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "iniciop { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
 		}else if(verificaCaractereEspecial(letra)) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			String newToken = "iniciop { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + getCabeca() + " )";
+			String newToken = "iniciop { " + getLexema() + " } (L"+ getNumeroLinha() + " - C" + (getCabeca()-1) + " )";
 			linhasTokens.add(newToken);
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
@@ -1401,7 +1947,7 @@ public class AnalisadorLexico {
 		}
 		else { 
 			System.out.println("Erro Léxico (" +  this.getNumeroLinha() + " " 
-										+ getCabeca() +"): Caracter"  + letra +  "Inesperado ");
+										+ getCabeca() +"): Caracter { "  + letra +  " } Inesperado \n ");
 		}
 		
 
