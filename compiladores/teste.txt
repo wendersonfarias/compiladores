@@ -1,9 +1,0 @@
-iniciop
-var numero;
-numero = 7;
-se ( numero > 6 ) entao
-	iniciolaco 1 < 2 
-		escreva ( 1 );
-	fimlaco
-fimse
-fimp

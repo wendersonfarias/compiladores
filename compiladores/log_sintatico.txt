@@ -1,0 +1,273 @@
+Inicio da Analise Sintatica
+
+
+Pilha atual
+$, <programa>
+
+Desempilhado: <programa>
+
+Empilhado: fimprograma
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: inicioprograma
+
+**************Dois Terminais*****************
+
+Desempilhado: inicioprograma
+
+Desempilhado: inicioprograma
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <declaracao_var>
+
+Desempilhado: <declaracao_var>
+
+Empilhado: ;
+
+Empilhado: id
+
+Empilhado: var
+
+**************Dois Terminais*****************
+
+Desempilhado: var
+
+Desempilhado: var
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <escreva>
+
+Desempilhado: <escreva>
+
+Empilhado: ;
+
+Empilhado: )
+
+Empilhado: <qualquer_expressao>
+
+Empilhado: (
+
+Empilhado: escreva
+
+**************Dois Terminais*****************
+
+Desempilhado: escreva
+
+Desempilhado: escreva
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: (
+
+Desempilhado: (
+
+*********************************************
+
+Desempilhado: <qualquer_expressao>
+
+Empilhado: <expressao_basica>
+
+Desempilhado: <expressao_basica>
+
+Empilhado: <operador_basico>
+
+Empilhado: numero
+
+**************Dois Terminais*****************
+
+Desempilhado: numero
+
+Desempilhado: numero
+
+*********************************************
+
+Desempilhado: <operador_basico>
+
+Empilhado: î
+
+********  Vazio  *****************************
+
+Desempilhado: î
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: )
+
+Desempilhado: )
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <declaracao_var>
+
+Desempilhado: <declaracao_var>
+
+Empilhado: ;
+
+Empilhado: id
+
+Empilhado: var
+
+**************Dois Terminais*****************
+
+Desempilhado: var
+
+Desempilhado: var
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <atribuicao>
+
+Desempilhado: <atribuicao>
+
+Empilhado: ;
+
+Empilhado: <expressao_basica>
+
+Empilhado: =
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: =
+
+Desempilhado: =
+
+*********************************************
+
+Desempilhado: <expressao_basica>
+
+Empilhado: <operador_basico>
+
+Empilhado: numero
+
+**************Dois Terminais*****************
+
+Desempilhado: numero
+
+Desempilhado: numero
+
+*********************************************
+
+Desempilhado: <operador_basico>
+
+Empilhado: î
+
+********  Vazio  *****************************
+
+Desempilhado: î
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: î
+
+********  Vazio  *****************************
+
+Desempilhado: î
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: fimprograma
+
+Desempilhado: fimprograma
+
+*********************************************

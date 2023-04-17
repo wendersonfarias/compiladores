@@ -1,0 +1,17 @@
+inicioprograma
+var
+id
+;
+escreva
+(
+numero
+)
+;
+var
+id
+;
+id
+=
+numero
+;
+fimprograma

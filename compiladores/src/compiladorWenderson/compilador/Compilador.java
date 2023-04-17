@@ -5,20 +5,32 @@ import java.io.IOException;
 
 import compiladorWenderson.compilador.lexico.AnalisadorLexico;
 import compiladorWenderson.compilador.lexico.ListaTokens;
+import compiladorWenderson.compilador.sintatico.AnalisadorSintatico;
+import compiladorWenderson.compilador.sintatico.ListaLog;
 
 public class Compilador {
 
 	public static void main(String[] args) throws IOException {
 		String arquivo = ""  ;
 		Boolean EscrevelistaTokens = false;
+		Boolean ListarLog = false;
 		for (String arg : args) {
-            if (arg.equals("-lt")) {
+			if(arg.equals("-tudo")) {
+				ListarLog= true;
+				EscrevelistaTokens = true;
+			}
+			else if (arg.equals("-lt")) {
             	EscrevelistaTokens = true;
+            }else if(arg.equals("-ls")) {
+            	ListarLog= true;
             }
+            
             if(arg.contains("txt")) {
             	 arquivo = arg;
             	
-            }       
+            }else {
+            	arquivo = "fonte.txt";
+            }      
         }
 
 		try {
@@ -30,7 +42,17 @@ public class Compilador {
 		}
 		
 		AnalisadorLexico an = new AnalisadorLexico();
-		an.analisaTokens(arquivo);
+		AnalisadorSintatico as = new AnalisadorSintatico();
+		Boolean erroLexico = an.analisaTokens(arquivo);
+		
+		if(!erroLexico) {
+			Boolean erroSintatico = as.analisaSintatico();
+		}else {
+			System.out.println("Não é possivel usar o analisador sintatico");
+		}
+		
+		
+		
 		
 		
 		
@@ -38,6 +60,9 @@ public class Compilador {
 		if(EscrevelistaTokens) {
 			System.out.println("TOKEN { lexema } (Linha - Coluna) \n");
 			ListaTokens.listaToken();
+		}
+		if(ListarLog && !erroLexico ) {
+			ListaLog.listaLog();
 		}
 			
 		

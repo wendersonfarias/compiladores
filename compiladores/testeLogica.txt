@@ -1,0 +1,12 @@
+iniciop
+   var num;
+    leia(num);
+
+    se( num > 7 )
+        escreva(1);
+    senao
+        se( num < 7 )
+            escreva(0);
+        fimse
+    fimse
+fimp

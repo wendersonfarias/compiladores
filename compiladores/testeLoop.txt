@@ -1,0 +1,7 @@
+iniciop
+    var num;  
+    leia(num);
+    laco(num < 0)
+        num = num - 1;
+    fimlaco
+fimp

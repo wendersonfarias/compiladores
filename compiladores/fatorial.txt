@@ -1,0 +1,17 @@
+iniciop
+    var numero;
+    var fatorial;
+
+    leia(numero);
+
+    fatorial=1;
+
+    laco( numero > 1 )
+        fatorial = fatorial * numero;
+        numero = numero - 1;
+    fimlaco
+
+    
+    escreva(fatorial);
+
+fimp
