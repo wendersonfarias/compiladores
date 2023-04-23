@@ -1,6 +1,52 @@
 iniciop
-	var teste;
-	escreva(1);
-	var num;
-	num = 2;
+
+var l1;
+var l2;
+var l3;
+
+leia(l1);
+leia(l2);
+leia(l3);
+
+var l12;
+var l13;
+var l32;
+
+l12 = l1 + l2;
+l13 = l1 + l3;
+l23 = l2 + l3;
+
+se(l12 > l3)
+	se(l13 > l2)
+		se(l23 > l1)
+				
+				se(l1 == l2)
+					se(l1 == l3)
+						escreva(1)
+					senao
+						
+							escreva (2)
+						
+					fimse	
+					
+					senao 
+					
+						escreva (2)
+				fimse		
+				
+				
+				
+				
+			senao 
+				escreva(99);
+				
+		fimse
+		
+	senao 
+			escreva(99);
+	fimse
+senao
+	escreva(99);	
+fimse
+
 fimp

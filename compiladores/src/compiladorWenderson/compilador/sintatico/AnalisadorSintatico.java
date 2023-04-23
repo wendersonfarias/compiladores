@@ -190,11 +190,15 @@ public class AnalisadorSintatico {
 						 
 					else if( producao == 37) 
 						producao37();
+					else if( producao == 38) 
+						producao38();
 						 
 	
 					else {
 						System.out.println("Erro sintatico token " + tokens.peek());
 						ErroSintatico = true;
+						System.out.println(linhasColunas.peek());
+						break;
 					}
 					
 				}
@@ -211,6 +215,7 @@ public class AnalisadorSintatico {
 					imprimePontilhado();
 					ErroSintatico = true;
 					System.out.println("Erro sintatico "+ tokens.peek()+ " inesperado");
+					System.out.println(linhasColunas.peek());
 					System.out.println("\nDesempilhado: "+ tokens.pop());
 					linhasColunas.pop();
 					imprimePontilhado();
@@ -235,6 +240,7 @@ public class AnalisadorSintatico {
 				
 				else {
 					System.out.println("Erro sintatico " + tokens.peek() + " inesperado");
+					System.out.println(linhasColunas.peek());
 					ErroSintatico = true;
 				}
 				
@@ -372,12 +378,13 @@ public class AnalisadorSintatico {
 		tabela[14][13]=  32 ;tabela[14][18]=  32 ;
 		tabela[14][19]=  32 ;
 		
-		tabela[15][1]=  37 ;tabela[15][2]=  37 ;
+		tabela[15][1]=  38 ;tabela[15][2]=  38 ;
 		
 		tabela[16][1]=  30 ;tabela[16][2]= 31  ;
 		
 		tabela[17][22]= 33 ;tabela[17][23]= 36 ;
 		tabela[17][24]= 35 ;tabela[17][25]= 34 ;
+		tabela[17][17]= 37 ;
 
 		
 		return tabela;
@@ -464,6 +471,8 @@ public class AnalisadorSintatico {
 		empilhado.add("inicioprograma" );
 		logPilha(desenpilhado,empilhado);
 	}
+	
+	
 	
 	void producao1() {
 		String desenpilhado;
@@ -890,6 +899,15 @@ public class AnalisadorSintatico {
 	}
 	
 	void producao37() {
+		ArrayList<String> empilhado = new ArrayList<String>();
+		String desenpilhado = getPilha().pop();
+		getPilha().push("==");
+		
+		empilhado.add("==");
+		logPilha(desenpilhado,empilhado);
+	}
+	
+	void producao38() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("<id_or_number>");

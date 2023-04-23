@@ -24,6 +24,7 @@ public class AnalisadorLexico {
 	ArrayList<String> tabelaLinhaColuna = new ArrayList<String>();
 	
 	Boolean temErro = false;
+	Integer tabulacao;
 	
 	
 	
@@ -69,6 +70,7 @@ public class AnalisadorLexico {
 				this.adiconaLinha();
 				this.setFita(linha);
 				this.setCabeca(0);
+				tabulacao = 0;
 				this.automato();
 			} 
 			
@@ -184,6 +186,7 @@ public class AnalisadorLexico {
 		}else if(letra.matches("\\d+")) {
 			this.estadoQ71();
 		}else if(letra.equals("\t")) {
+			tabulacao += 3;
 			this.setLexema("");
 			estadoQ0();
 		}else if(letra.equals(" ")) {
@@ -1973,15 +1976,15 @@ public class AnalisadorLexico {
 	
 	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere ) {
 		System.out.println("Erro Léxico ( Linha: " +  numeroLinha + " - Coluna: " 
-				+ coluna +"): Caracter { "  + caractere +  " } Inesperado \n ");
+				+ ((coluna-1) - lexema.length()+tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
 		temErro = true;
 	}
 
 	
 	public void salvaToken(String token, String lexema, Integer numeroLinha, Integer coluna) {
-		String newToken = token + " { " + lexema + " } (L"+ numeroLinha + " - C" + (coluna-1) + " )";
+		String newToken = token + " { " + lexema + " } (L"+ numeroLinha + " - C" + ((coluna) - lexema.length()+tabulacao) + " )";
 		linhasTokens.add(newToken);
 		tabelaTokens.add(token);
-		tabelaLinhaColuna.add("(Linha: "+ numeroLinha + " - Coluna: " + (coluna-1) + " )");		
+		tabelaLinhaColuna.add("(Linha: "+ numeroLinha + " - Coluna: " + ((coluna) - lexema.length()+tabulacao) + " )");		
 	}
 }
