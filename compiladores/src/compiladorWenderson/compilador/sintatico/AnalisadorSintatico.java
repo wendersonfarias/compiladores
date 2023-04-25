@@ -1,25 +1,13 @@
 package compiladorWenderson.compilador.sintatico;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Reader;
-import java.io.Writer;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Stack;
+
+import compiladorWenderson.compilador.TokensLinhaColunaLog;
 
 public class AnalisadorSintatico {
 	
@@ -36,9 +24,12 @@ public class AnalisadorSintatico {
 	
 	Boolean ErroSintatico = false;
 	
+	TokensLinhaColunaLog tokensLinhaColunaLog  = new  TokensLinhaColunaLog();
 	
 	
-	public AnalisadorSintatico() {
+	
+	public AnalisadorSintatico(TokensLinhaColunaLog tokensLinhaColunaLog) {
+		this.tokensLinhaColunaLog = tokensLinhaColunaLog;
 		this.pilha.push("$");
 		this.pilha.push("<programa>");
 		this.nomeArquivo = "tabela_tokens.txt";
@@ -249,7 +240,7 @@ public class AnalisadorSintatico {
 		
 		}while(!pilha.empty());
 		
-		logs();
+		escreveLogs();
 		
 		return ErroSintatico;
 	
@@ -940,37 +931,14 @@ public class AnalisadorSintatico {
 	}
 	
 	public void obtemTokens() throws IOException {
-		InputStream fis =new FileInputStream(getNomeArquivo());  
-		Reader isr = new InputStreamReader(fis);
-		BufferedReader br = new BufferedReader(isr);
 		Stack<String> linhasTokens = new Stack<String>(); 
-		
-		InputStream fis1 =new FileInputStream("tabela_linha_coluna.txt");  
-		Reader isr1 = new InputStreamReader(fis1);
-		BufferedReader br1 = new BufferedReader(isr1);
 		Stack<String> LinhasColunas = new Stack<String>(); 
 		
-		String linha ;
-		do {
-			linha = br.readLine();
-			if(linha != null) {
-				
-				linhasTokens.push(linha);
-			} 
-			
-		}while( linha != null );
+	
+		linhasTokens.addAll(tokensLinhaColunaLog.getToken());
 		
-		linha = null;
-		do {
-			linha = br1.readLine();
-			if(linha != null) {
-				
-				LinhasColunas.push(linha);
-			} 
-			
-		}while( linha != null );
+		LinhasColunas.addAll(tokensLinhaColunaLog.getLinhaColuna());
 		
-		br1.close();
 		
 		Collections.reverse(linhasTokens);
 		Collections.reverse(LinhasColunas);
@@ -980,18 +948,12 @@ public class AnalisadorSintatico {
 		
 	}
 	
-	void logs() throws IOException {
-		OutputStream fos = new FileOutputStream("log_sintatico.txt");   
-		Writer osw = new OutputStreamWriter(fos);
-		BufferedWriter bw = new BufferedWriter(osw);
+	void escreveLogs() throws IOException {
 		
 		for (int i = 0; i < LOGS.size(); i++) {
-			bw.write(LOGS.get(i));
-			bw.newLine();
-			bw.flush();
+			tokensLinhaColunaLog.getLogSintatico().add(LOGS.get(i));
+			
 		}
-		
-		bw.close();
 		
 		
 	}

@@ -8,45 +8,37 @@ leia(l1);
 leia(l2);
 leia(l3);
 
-var l12;
-var l13;
-var l32;
-
-l12 = l1 + l2;
-l13 = l1 + l3;
-l23 = l2 + l3;
-
-se(l12 > l3)
-	se(l13 > l2)
-		se(l23 > l1)
-				
-				se(l1 == l2)
-					se(l1 == l3)
-						escreva(1)
-					senao
-						
-							escreva (2)
-						
-					fimse	
-					
-					senao 
-					
-						escreva (2)
-				fimse		
-				
-				
-				
-				
-			senao 
-				escreva(99);
-				
-		fimse
-		
-	senao 
-			escreva(99);
-	fimse
+se (l1 + > l3)  
+  se (l1 + l3 > l2)  
+    se (l2 + l3 > l1)  
+      se (l1 == l2)  
+        se (l2 == l3)  
+          escreva(1);
+        fimse
+        senao
+          escreva(2); 
+        fimse
+      senao
+        se (l1 == l3)  
+          escreva(2);  
+        fimse
+        senao
+          se (l2 == l3)  
+            escreva(2);
+          fimse
+          senao
+            escreva(3);
+          fimse
+        fimse
+      fimse
+    senao
+      escreva(99);
+    fimse
+  senao
+    escreva(99);
+  fimse
 senao
-	escreva(99);	
+  escreva(99);
 fimse
 
-fimp
+fimp	

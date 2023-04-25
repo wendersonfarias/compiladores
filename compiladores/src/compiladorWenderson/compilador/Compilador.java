@@ -41,11 +41,13 @@ public class Compilador {
 			System.out.println("arquivo não encontrado");
 		}
 		
+		TokensLinhaColunaLog tokensLinhaColunaLog = new TokensLinhaColunaLog();
 		AnalisadorLexico an = new AnalisadorLexico();
-		AnalisadorSintatico as = new AnalisadorSintatico();
-		Boolean erroLexico = an.analisaTokens(arquivo);
+		AnalisadorSintatico as = new AnalisadorSintatico(tokensLinhaColunaLog);
 		
-		if(!erroLexico) {
+		tokensLinhaColunaLog = an.analisaTokens(arquivo);
+		
+		if(!tokensLinhaColunaLog.getErroLexico()) {
 			Boolean erroSintatico = as.analisaSintatico();
 		}else {
 			System.out.println("Não é possivel usar o analisador sintatico");
@@ -59,10 +61,10 @@ public class Compilador {
 		
 		if(EscrevelistaTokens) {
 			System.out.println("TOKEN { lexema } (Linha - Coluna) \n");
-			ListaTokens.listaToken();
+			new ListaTokens(tokensLinhaColunaLog).listaToken();
 		}
-		if(ListarLog && !erroLexico ) {
-			ListaLog.listaLog();
+		if(ListarLog && !tokensLinhaColunaLog.getErroLexico() ) {
+			new ListaLog(tokensLinhaColunaLog).listaLog();
 		}
 			
 		

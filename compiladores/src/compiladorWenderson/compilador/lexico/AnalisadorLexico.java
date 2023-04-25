@@ -1,17 +1,14 @@
 package compiladorWenderson.compilador.lexico;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.Reader;
-import java.io.Writer;
 import java.util.ArrayList;
+
+import compiladorWenderson.compilador.TokensLinhaColunaLog;
 
 public class AnalisadorLexico {
 	
@@ -22,6 +19,7 @@ public class AnalisadorLexico {
 	ArrayList<String> linhasTokens = new ArrayList<String>();
 	ArrayList<String> tabelaTokens = new ArrayList<String>();
 	ArrayList<String> tabelaLinhaColuna = new ArrayList<String>();
+	TokensLinhaColunaLog tokensLinhaColunaLog = new TokensLinhaColunaLog();
 	
 	Boolean temErro = false;
 	Integer tabulacao;
@@ -39,26 +37,12 @@ public class AnalisadorLexico {
 
 	
 
-	public Boolean analisaTokens(String nomeArquivo) throws IOException {
+	public TokensLinhaColunaLog analisaTokens(String nomeArquivo) throws IOException {
+		
+		
 		InputStream fis =new FileInputStream(nomeArquivo);  
 		Reader isr = new InputStreamReader(fis);
 		BufferedReader br = new BufferedReader(isr);
-		
-		
-
-		OutputStream fos = new FileOutputStream("tabela_simbolo.txt");   
-		Writer osw = new OutputStreamWriter(fos);
-		BufferedWriter bw = new BufferedWriter(osw);
-		
-		
-		OutputStream fos11 = new FileOutputStream("tabela_tokens.txt");   
-		Writer osw11 = new OutputStreamWriter(fos11);
-		BufferedWriter bw11 = new BufferedWriter(osw11);
-		
-		OutputStream fos13 = new FileOutputStream("tabela_linha_coluna.txt");   
-		Writer osw13 = new OutputStreamWriter(fos13);
-		BufferedWriter bw13 = new BufferedWriter(osw13);
-		
 		
 		Character pulaLinha = Character.valueOf('\n');
 		
@@ -80,9 +64,7 @@ public class AnalisadorLexico {
 		
 		
 		for (int i = 0; i < linhasTokens.size(); i++) {
-			bw.write(linhasTokens.get(i));
-			bw.newLine();
-			bw.flush();
+			tokensLinhaColunaLog.getToken().add(linhasTokens.get(i));
 		}
 		
 		
@@ -90,34 +72,17 @@ public class AnalisadorLexico {
 		
 		
 		for (int i = 0; i < tabelaTokens.size(); i++) {
-			bw11.write(tabelaTokens.get(i));
-			bw11.newLine();
-			bw11.flush();
+			tokensLinhaColunaLog.getTabelaSimbolos().add(tabelaTokens.get(i));
+			
 		}
 		
 		for (int i = 0; i < tabelaLinhaColuna.size(); i++) {
-			bw13.write(tabelaLinhaColuna.get(i));
-			bw13.newLine();
-			bw13.flush();
+			tokensLinhaColunaLog.getLinhaColuna().add(tabelaLinhaColuna.get(i));
 		}
 		
-			
-		
-		/*while( !(linha == null || linha.isEmpty()) ) {
-			bw.write(linha);
-			bw.newLine();
-			bw.flush();
-			linha = br.readLine();
-		}*/
-	
-		
-		
-		bw11.close();
-		bw13.close();
-		bw.close();
 		br.close();
 		
-		return temErro;
+		return tokensLinhaColunaLog;
 		
 	}
 
@@ -185,9 +150,10 @@ public class AnalisadorLexico {
 			this.estadoQ12();
 		}else if(letra.matches("\\d+")) {
 			this.estadoQ71();
-		}else if(letra.equals("\t")) {
+		}else if(letra.equals(barraT)) {
 			tabulacao += 3;
 			this.setLexema("");
+			//setCabeca(getCabeca()+3);
 			estadoQ0();
 		}else if(letra.equals(" ")) {
 			this.setLexema("");
@@ -221,7 +187,7 @@ public class AnalisadorLexico {
 			}
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca());
 			this.setLexema("");
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca());
 			this.setLexema("");
@@ -238,7 +204,6 @@ public class AnalisadorLexico {
 		}
 		else { 
 			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
-			
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -266,7 +231,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -284,7 +249,6 @@ public class AnalisadorLexico {
 		
 		else { 
 			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
-			
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -311,7 +275,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -351,7 +315,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -391,7 +355,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -435,7 +399,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -475,7 +439,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -515,7 +479,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -556,7 +520,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -596,7 +560,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -636,7 +600,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -680,7 +644,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -719,7 +683,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -758,7 +722,7 @@ public class AnalisadorLexico {
 			this.estadoQ0();
 
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -803,7 +767,7 @@ public class AnalisadorLexico {
 					this.estadoQ0();
 
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ")|| letra.equals("\t")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -836,7 +800,7 @@ public class AnalisadorLexico {
 			estadoQ53();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -855,7 +819,7 @@ public class AnalisadorLexico {
 			estadoQ54();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -880,7 +844,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -917,7 +881,7 @@ public class AnalisadorLexico {
 		
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -936,7 +900,7 @@ public class AnalisadorLexico {
 			estadoQ36();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -955,7 +919,7 @@ public class AnalisadorLexico {
 			estadoQ37();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -980,7 +944,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -1017,7 +981,7 @@ public class AnalisadorLexico {
 			estadoQ30();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1036,7 +1000,7 @@ public class AnalisadorLexico {
 			estadoQ31();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1055,7 +1019,7 @@ public class AnalisadorLexico {
 			estadoQ32();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1074,7 +1038,7 @@ public class AnalisadorLexico {
 			estadoQ33();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1098,7 +1062,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -1131,7 +1095,7 @@ public class AnalisadorLexico {
 			estadoQ25();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1150,7 +1114,7 @@ public class AnalisadorLexico {
 			estadoQ26();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1169,7 +1133,7 @@ public class AnalisadorLexico {
 			estadoQ27();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1188,7 +1152,7 @@ public class AnalisadorLexico {
 			estadoQ28();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1207,7 +1171,7 @@ public class AnalisadorLexico {
 			estadoQ29();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1264,7 +1228,7 @@ public class AnalisadorLexico {
 			estadoQ17();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1283,7 +1247,7 @@ public class AnalisadorLexico {
 			estadoQ18();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1308,7 +1272,7 @@ public class AnalisadorLexico {
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ")|| letra.equals("\t")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -1340,7 +1304,7 @@ public class AnalisadorLexico {
 			estadoQ14();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ") || letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1368,7 +1332,7 @@ public class AnalisadorLexico {
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ") || letra.equals("\t")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -1400,7 +1364,7 @@ public class AnalisadorLexico {
 			estadoQ9();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ") || letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1419,7 +1383,7 @@ public class AnalisadorLexico {
 			estadoQ10();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ") || letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1442,7 +1406,7 @@ public class AnalisadorLexico {
 			estadoQ48();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1461,7 +1425,7 @@ public class AnalisadorLexico {
 			estadoQ49();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1480,7 +1444,7 @@ public class AnalisadorLexico {
 			estadoQ50();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1499,7 +1463,7 @@ public class AnalisadorLexico {
 			estadoQ51();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1524,7 +1488,7 @@ public class AnalisadorLexico {
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ")|| letra.equals("\t")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -1556,7 +1520,7 @@ public class AnalisadorLexico {
 			estadoQ23();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1576,12 +1540,12 @@ public class AnalisadorLexico {
 				String letra = obterCharacter();
 				String token = "fimse";
 				
-				if(letra.equals(fimLinha)) {
+				if(letra.equals(fimLinha) ) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ")||letra.equals("\t") ) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -1599,6 +1563,7 @@ public class AnalisadorLexico {
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
 				}
+				
 				else { 
 					imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 				}
@@ -1619,7 +1584,7 @@ public class AnalisadorLexico {
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ")|| letra.equals("\t")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -1651,7 +1616,7 @@ public class AnalisadorLexico {
 			estadoQ2();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1670,7 +1635,7 @@ public class AnalisadorLexico {
 			estadoQ3();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1689,7 +1654,7 @@ public class AnalisadorLexico {
 			estadoQ4();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1708,7 +1673,7 @@ public class AnalisadorLexico {
 			estadoQ5();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1727,7 +1692,7 @@ public class AnalisadorLexico {
 			estadoQ6();
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1750,7 +1715,7 @@ public class AnalisadorLexico {
 			estadoQ46();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1769,7 +1734,7 @@ public class AnalisadorLexico {
 			estadoQ47();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1794,7 +1759,7 @@ public class AnalisadorLexico {
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
 					//termina a linha e reconhece o token
-				}else if(letra.equals(" ")) {
+				}else if(letra.equals(" ")|| letra.equals("\t")) {
 					this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 					salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 					this.setLexema("");
@@ -1827,7 +1792,7 @@ public class AnalisadorLexico {
 			estadoQ7();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
@@ -1852,7 +1817,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")) {
+		}else if(letra.equals(" ")|| letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -1977,7 +1942,7 @@ public class AnalisadorLexico {
 	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere ) {
 		System.out.println("Erro Léxico ( Linha: " +  numeroLinha + " - Coluna: " 
 				+ ((coluna-1) - lexema.length()+tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
-		temErro = true;
+		tokensLinhaColunaLog.setErroLexico(true);
 	}
 
 	
