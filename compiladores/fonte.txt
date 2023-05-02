@@ -1,4 +1,2 @@
-inicioprograma
-   var x = @10 // Caractere não reconhecido
-   var y = 20
-fimprograma
+iniciop
+fimp
