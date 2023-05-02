@@ -27,7 +27,7 @@ public class ListaTokens {
 			BufferedWriter bw = new BufferedWriter(osw);
 			
 	
-			for (String valor : tokensLinhaColunaLog.getTabelaSimbolos()) {
+			for (String valor : tokensLinhaColunaLog.getToken()) {
 				bw.write(valor);
 				bw.newLine();
 				bw.flush();

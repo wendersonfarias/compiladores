@@ -47,11 +47,11 @@ public class Compilador {
 		
 		tokensLinhaColunaLog = an.analisaTokens(arquivo);
 		
-		if(!tokensLinhaColunaLog.getErroLexico()) {
+		/*if(!tokensLinhaColunaLog.getErroLexico()) {
 			Boolean erroSintatico = as.analisaSintatico();
 		}else {
 			System.out.println("Não é possivel usar o analisador sintatico");
-		}
+		}*/
 		
 		
 		
@@ -60,12 +60,14 @@ public class Compilador {
 		
 		
 		if(EscrevelistaTokens) {
+			System.out.println("*****************************************Inicio Listagem Token******************************************************************");
 			System.out.println("TOKEN { lexema } (Linha - Coluna) \n");
 			new ListaTokens(tokensLinhaColunaLog).listaToken();
+			System.out.println("*****************************************Fim Listagem Token******************************************************************");
 		}
-		if(ListarLog && !tokensLinhaColunaLog.getErroLexico() ) {
+		/*if(ListarLog && !tokensLinhaColunaLog.getErroLexico() ) {
 			new ListaLog(tokensLinhaColunaLog).listaLog();
-		}
+		}*/
 			
 		
 		
