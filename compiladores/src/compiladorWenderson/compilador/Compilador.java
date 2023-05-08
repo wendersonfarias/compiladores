@@ -2,6 +2,7 @@ package compiladorWenderson.compilador;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import compiladorWenderson.compilador.lexico.AnalisadorLexico;
 import compiladorWenderson.compilador.lexico.ListaTokens;
@@ -45,11 +46,12 @@ public class Compilador {
 		AnalisadorLexico an = new AnalisadorLexico();
 		
 		
-		tokensLinhaColunaLog = an.analisaTokens(arquivo);
-		AnalisadorSintatico as = new AnalisadorSintatico(tokensLinhaColunaLog);
+		ArrayList<Token> listaToken = an.analisaTokens(arquivo);
+		AnalisadorSintatico as = new AnalisadorSintatico(listaToken);
+		ArrayList<String> listaLogs = null;
 		
-		if(!tokensLinhaColunaLog.getErroLexico()) {
-			Boolean erroSintatico = as.analisaSintatico();
+		if(listaToken != null) {
+			listaLogs = as.analisaSintatico();
 		}else {
 			System.out.println("Não é possivel usar o analisador sintatico");
 		}
@@ -62,12 +64,11 @@ public class Compilador {
 		
 		if(EscrevelistaTokens) {
 			System.out.println("*****************************************Inicio Listagem Token******************************************************************");
-			System.out.println("TOKEN { lexema } (Linha - Coluna) \n");
-			new ListaTokens(tokensLinhaColunaLog).listaToken();
+			new ListaTokens(listaToken).listaToken();
 			System.out.println("*****************************************Fim Listagem Token******************************************************************");
 		}
-		if(ListarLog && !tokensLinhaColunaLog.getErroLexico() ) {
-			new ListaLog(tokensLinhaColunaLog).listaLog();
+		if(ListarLog && listaToken != null ) {
+			new ListaLog(listaLogs).listaLog();
 		}
 			
 		

@@ -1,2 +1,9 @@
 iniciop
+var num1;
+var num2;
+se(num1 > num2 )
+	escreva(num1);
+senao
+	escreva(num2);
+fimse;
 fimp

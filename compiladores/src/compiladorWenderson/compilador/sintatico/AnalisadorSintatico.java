@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Stack;
 
-import compiladorWenderson.compilador.TokensLinhaColunaLog;
+import compiladorWenderson.compilador.Token;
 
 public class AnalisadorSintatico {
 	
@@ -24,12 +24,11 @@ public class AnalisadorSintatico {
 	
 	Boolean ErroSintatico = false;
 	
-	TokensLinhaColunaLog tokensLinhaColunaLog  = new  TokensLinhaColunaLog();
 	
+	ArrayList<Token> listaToken = new ArrayList<Token>();
 	
-	
-	public AnalisadorSintatico(TokensLinhaColunaLog tokensLinhaColunaLog) {
-		this.tokensLinhaColunaLog = tokensLinhaColunaLog;
+	public AnalisadorSintatico(ArrayList<Token> listaToken) {
+		this.listaToken = listaToken;
 		this.pilha.push("$");
 		this.pilha.push("<programa>");
 		this.nomeArquivo = "tabela_tokens.txt";
@@ -42,10 +41,8 @@ public class AnalisadorSintatico {
 	
 
 
-	public Boolean analisaSintatico() throws IOException {
-		this.tokensLinhaColunaLog.setErroSintatico(false);
+	public ArrayList<String> analisaSintatico() throws IOException {
 		
-		//imprimePontilhado();
 		LOGS.add("Inicio da Analise Sintatica\n");
 		LOGS.add("\nPilha atual");
 		LOGS.add("$, <programa>" );
@@ -64,7 +61,7 @@ public class AnalisadorSintatico {
 				if(producao == null) {
 					imprimePontilhado();
 					System.out.println("Erro sintatico: ["+ tokens.peek()+ "] inesperado");
-					this.tokensLinhaColunaLog.setErroSintatico(true);
+					ErroSintatico = (true);
 					System.out.println(linhasColunas.peek());
 					imprimePontilhado();
 					break;
@@ -162,17 +159,9 @@ public class AnalisadorSintatico {
 					else if( producao == 30) 
 						producao30();
 						 
-					else if( producao == 31) 
-						producao31();
-						 
-					else if( producao == 32) 
-						producao32();
-						 
-						 
-	
 					else {
 						System.out.println("Erro sintatico token " + tokens.peek());
-						this.tokensLinhaColunaLog.setErroSintatico(true);
+						ErroSintatico = (true);
 						System.out.println(linhasColunas.peek());
 						break;
 					}
@@ -189,7 +178,7 @@ public class AnalisadorSintatico {
 					
 				}else if(pilha.peek().equals("$") && !tokens.isEmpty()) {
 					imprimePontilhado();
-					this.tokensLinhaColunaLog.setErroSintatico(true);
+					ErroSintatico = (true);
 					System.out.println("Erro sintatico "+ tokens.peek()+ " inesperado");
 					System.out.println(linhasColunas.peek());
 					System.out.println("\nDesempilhado: "+ tokens.pop());
@@ -217,7 +206,7 @@ public class AnalisadorSintatico {
 				else {
 					System.out.println("Erro sintatico " + tokens.peek() + " inesperado");
 					System.out.println(linhasColunas.peek());
-					this.tokensLinhaColunaLog.setErroSintatico(true);
+					ErroSintatico = (true);
 				}
 				
 			}
@@ -225,9 +214,12 @@ public class AnalisadorSintatico {
 		
 		}while(!pilha.empty());
 		
-		escreveLogs();
+		//escreveLogs();
 		
-		return this.tokensLinhaColunaLog.getErroSintatico();
+		if(ErroSintatico) {
+			return null;
+		}
+		return LOGS;
 	
 	}
 	
@@ -309,7 +301,7 @@ public class AnalisadorSintatico {
 	
 	
 	private Integer[][] inicializaTabelaSintatica() {
-		Integer[][] tabela =  new Integer[24][27]; ;
+		Integer[][] tabela =  new Integer[30][30]; ;
 		
 		int linhas = tabela.length;
 		int colunas = tabela[0].length;
@@ -323,53 +315,51 @@ public class AnalisadorSintatico {
 		tabela[0][0] =  1 ;tabela[0][3] =  0 ;
 		
 		
-		tabela[1][4]=   3 ;tabela[1][6] =  3 ;
+		tabela[1][1]=   2 ;tabela[1][4] =  3 ;
+		tabela[1][5] =  3 ;tabela[1][6] =  3 ;
 		tabela[1][7] =  2 ;tabela[1][8] =  3 ;
-		tabela[1][9] =  2 ;tabela[1][10] = 2 ;
+		tabela[1][9]=   2 ;tabela[1][10]=  2 ;
 		tabela[1][11]=  2 ;tabela[1][12]=  2 ;
-		tabela[1][15]=  3 ;
 		
-		tabela[2][7]=  11 ;tabela[2][9]=   10;
-		tabela[2][10]=  5 ;tabela[2][11]=  6 ;
-		tabela[2][12]=  7 ;
+		tabela[2][1]=   4 ;tabela[2][7]=   9 ;
+		tabela[2][9]=   8 ;tabela[2][10]=  5 ;
+		tabela[2][11]=  6 ;tabela[2][12]=  7 ;
 		
-		tabela[3][1]=  4 ;
+		tabela[3][1]=  12 ;tabela[3][2]=  12 ;
+		tabela[3][13]= 12 ;
 		
-		tabela[4][1]=  14 ;tabela[4][2]=  14 ;
-		tabela[4][13]= 14 ;
+		tabela[4][5]=  11 ;tabela[4][8]=  10 ;
 		
-		tabela[5][8]=   12;tabela[5][15]= 13 ;
+		tabela[5][1]=  15 ;tabela[5][2]= 15 ;
+		tabela[5][13]= 15 ;
 		
-		tabela[6][1]=   17 ;tabela[6][2]= 17;
-		tabela[6][13]=  17 ;
+		tabela[6][14]=  14 ;tabela[6][15]= 14 ;
+		tabela[6][17]=  14 ;tabela[6][18]= 13 ;
+		tabela[6][19]=  13 ;tabela[6][22]=  14 ;
+		tabela[6][23]=  14 ;tabela[6][24]=  14 ;
+		tabela[6][25]=  14 ;
 		
-		tabela[7][14]=  16 ;tabela[7][15]=  16; 
-		tabela[7][17]=  16 ;tabela[7][18]=  15;
-		tabela[7][19]=  15 ;tabela[7][22]=  16;
-		tabela[7][23]=  16;  tabela[7][24]=  16;
-		tabela[7][25]=  16;
+		tabela[7][18]=  21 ;tabela[7][19]=  22; 
 		
-		tabela[8][18]=  23 ;tabela[8][19]=  24 ;
+		tabela[8][1]=   19 ;tabela[8][2]=   20 ;
+		tabela[8][13]=  18 ;
 		
-		tabela[9][1]=   21 ;tabela[9][2]=   22 ;
-		tabela[9][13]=  20 ;
+		tabela[9][14]=  17 ;tabela[9][15]=  17 ;
+		tabela[9][17]=  17 ;tabela[9][18]=  17 ;
+		tabela[9][19]=  17 ;tabela[9][20]=  16 ;
+		tabela[9][21]=  16 ;tabela[9][22]=  17 ;
+		tabela[9][23]=  17 ;tabela[9][24]=  17 ;
+		tabela[9][25]=  17 ;
 		
-		tabela[10][14]=  19;tabela[10][15]=  19 ;
-		tabela[10][17]=  19;tabela[10][18]=  19;
-		tabela[10][19]=  19;tabela[10][20]=  18;
-		tabela[10][21]=  18;tabela[10][22]=  19;
-		tabela[10][23]=  19;tabela[10][24]=  19;
-		tabela[10][25]=  19;
+	
+		tabela[10][20]= 23 ;tabela[10][21]=  24;
 		
-		tabela[11][20]=  25;tabela[11][21]=  26;
+		tabela[11][13]=  25;
 		
-		tabela[12][13]=  27;
+		tabela[12][17]=  30;tabela[12][22]=  26;
+		tabela[12][23]=  27;tabela[12][24]=  28;
+		tabela[12][25]=  29;
 		
-		tabela[13][17]= 32 ;tabela[13][22]= 28 ;
-		tabela[13][23]= 29 ;tabela[13][24]= 30 ;
-		tabela[13][25]= 31 ;
-		
-		tabela[14][15]=  9 ;tabela[14][26]=  8 ;
 
 		
 		return tabela;
@@ -381,9 +371,9 @@ public class AnalisadorSintatico {
 		lista.add("<programa>");
 		lista.add("<declaracao_recursiva>");
 		lista.add("<declaracao>");
-		lista.add("<atribuicao>");
 		lista.add("<expressao>");
 		lista.add("<senao>");
+		lista.add("<termo>");
 		lista.add("<proximo_termo>");
 		lista.add("<mais_menos>");
 		lista.add("<fator>");
@@ -391,7 +381,6 @@ public class AnalisadorSintatico {
 		lista.add("<multi_div>");
 		lista.add("<expressao_logica>");
 		lista.add("<operador_logico>");
-		lista.add("<declarao_variaveis>");
 		
 		for (int i = 0; i < lista.size(); i++) {
 		    mapa.put(lista.get(i), i);
@@ -429,7 +418,6 @@ public class AnalisadorSintatico {
 		lista.add("<=");
 		lista.add(">=");
 		lista.add(">");
-		lista.add(",");
 		
 		
 		
@@ -546,11 +534,9 @@ public class AnalisadorSintatico {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		desenpilhado = getPilha().pop();
 		
-		getPilha().push("<declarao_variaveis>");
 		getPilha().push("id");
 		getPilha().push("var");
 		
-		empilhado.add("<declarao_variaveis>");
 		empilhado.add("id");
 		empilhado.add("var");
 		logPilha(desenpilhado,empilhado);
@@ -560,13 +546,15 @@ public class AnalisadorSintatico {
 		String desenpilhado;
 		ArrayList<String> empilhado = new ArrayList<String>();
 		desenpilhado = getPilha().pop();
-		getPilha().push("<declarao_variaveis>");
-		getPilha().push("id");
-		getPilha().push(",");
+		getPilha().push("fimlaco");
+		getPilha().push("<declaracao_recursiva>");
+		getPilha().push("<expressao_logica>");
+		getPilha().push("laco");
 		
-		empilhado.add("<declarao_variaveis>");
-		empilhado.add("id");
-		empilhado.add(",");
+		empilhado.add("fimlaco");
+		empilhado.add("<declaracao_recursiva>");
+		empilhado.add("<expressao_logica>");
+		empilhado.add("laco");
 		logPilha(desenpilhado,empilhado);
 	}
 	
@@ -575,9 +563,17 @@ public class AnalisadorSintatico {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		desenpilhado = getPilha().pop();
 		
-		getPilha().push("î");
+		getPilha().push("fimse");
+		getPilha().push("<senao>");
+		getPilha().push("<declaracao_recursiva>");
+		getPilha().push("<expressao_logica>");
+		getPilha().push("se");
 		
-		empilhado.add("î");
+		empilhado.add("fimse");
+		empilhado.add("<senao>");
+		empilhado.add("<declaracao_recursiva>");
+		empilhado.add("<expressao_logica>");
+		empilhado.add("se");
 		logPilha(desenpilhado,empilhado);
 	}
 	
@@ -585,16 +581,13 @@ public class AnalisadorSintatico {
 		String desenpilhado;
 		ArrayList<String> empilhado = new ArrayList<String>();
 		desenpilhado = getPilha().pop();
-		getPilha().push("fimlaco");
+
 		getPilha().push("<declaracao_recursiva>");
-		getPilha().push("<expressao_logica>");
-		getPilha().push("laco");
+		getPilha().push("senao");
 		
 		
-		empilhado.add("fimlaco");
 		empilhado.add("<declaracao_recursiva>");
-		empilhado.add("<expressao_logica>");
-		empilhado.add("laco");
+		empilhado.add("senao");
 
 		logPilha(desenpilhado,empilhado);
 		
@@ -604,16 +597,9 @@ public class AnalisadorSintatico {
 		String desenpilhado;
 		ArrayList<String> empilhado = new ArrayList<String>();
 		desenpilhado = getPilha().pop();
-		getPilha().push("<senao>");
-		getPilha().push("<declaracao_recursiva>");
-		getPilha().push("<expressao_logica>");
-		getPilha().push("se");
-
-		
-		empilhado.add("<senao>");
-		empilhado.add("<declaracao_recursiva>");
-		empilhado.add("<expressao_logica>");
-		empilhado.add("se");
+		getPilha().push("î");
+	
+		empilhado.add("î");
 
 		
 		logPilha(desenpilhado,empilhado);
@@ -622,36 +608,15 @@ public class AnalisadorSintatico {
 	void producao12() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
-		getPilha().push("senao");
-		getPilha().push("<declaracao_recursiva>");
+		getPilha().push("<proximo_termo>");
+		getPilha().push("<termo>");
 		
-
-		empilhado.add("senao");
-		empilhado.add("<declaracao_recursiva>");
+		empilhado.add("<proximo_termo>");
+		empilhado.add("<termo>");
 		logPilha(desenpilhado,empilhado);
 	}
 	
 	void producao13() {
-		ArrayList<String> empilhado = new ArrayList<String>();
-		String desenpilhado = getPilha().pop();
-		getPilha().push("î");
-	
-		empilhado.add("î");
-		logPilha(desenpilhado,empilhado);
-	}
-	
-	void producao14() {
-		ArrayList<String> empilhado = new ArrayList<String>();
-		String desenpilhado = getPilha().pop();
-		getPilha().push("<proximo_termo>");
-		getPilha().push(" <termo>");
-		
-		empilhado.add("<proximo_termo>");
-		empilhado.add(" <termo>");
-		logPilha(desenpilhado,empilhado);
-	}
-	
-	void producao15() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("<proximo_termo>");
@@ -662,10 +627,9 @@ public class AnalisadorSintatico {
 		empilhado.add("<termo>");
 		empilhado.add("<mais_menos>");
 		logPilha(desenpilhado,empilhado);
-		
 	}
 	
-	void producao16() {
+	void producao14() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("î");
@@ -674,7 +638,7 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao17() {
+	void producao15() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("<proximo_fator>");
@@ -684,9 +648,10 @@ public class AnalisadorSintatico {
 		empilhado.add("<proximo_fator>");
 		empilhado.add("<fator>");
 		logPilha(desenpilhado,empilhado);
+		
 	}
 	
-	void producao18() {
+	void producao16() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("<proximo_fator>");
@@ -695,20 +660,20 @@ public class AnalisadorSintatico {
 		
 		empilhado.add("<proximo_fator>");
 		empilhado.add("<fator>");
-		empilhado.add("<multi_div> ");
+		empilhado.add("<multi_div>");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao19() {
+	void producao17() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("î");
-
+		
 		empilhado.add("î");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao20() {
+	void producao18() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push(")");
@@ -721,25 +686,25 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao21() {
+	void producao19() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("id");
-		
+
 		empilhado.add("id");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao22() {
+	void producao20() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("numero");
-		
+
 		empilhado.add("numero");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao23() {
+	void producao21() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("+");
@@ -748,34 +713,34 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao24() {
+	void producao22() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("-");
-	
+		
 		empilhado.add("-");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao25() {
+	void producao23() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("*");
-
+		
 		empilhado.add("*");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao26() {
+	void producao24() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("/");
-
+	
 		empilhado.add("/");
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao27() {
+	void producao25() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push(")");
@@ -793,7 +758,7 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao28() {
+	void producao26() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("<");
@@ -802,16 +767,17 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao29() {
+	void producao27() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("<=");
-		
+	
 		empilhado.add("<=");
+		
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao30() {
+	void producao28() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push(">=");
@@ -820,7 +786,7 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao31() {
+	void producao29() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push(">");
@@ -829,16 +795,14 @@ public class AnalisadorSintatico {
 		logPilha(desenpilhado,empilhado);
 	}
 	
-	void producao32() {
+	void producao30() {
 		ArrayList<String> empilhado = new ArrayList<String>();
 		String desenpilhado = getPilha().pop();
 		getPilha().push("==");
-		
+
 		empilhado.add("==");
 		logPilha(desenpilhado,empilhado);
 	}
-	
-	
 	
 	
 	void logPilha(String desempilhado, ArrayList<String> empilhado){
@@ -863,10 +827,12 @@ public class AnalisadorSintatico {
 		Stack<String> linhasTokens = new Stack<String>(); 
 		Stack<String> LinhasColunas = new Stack<String>(); 
 		
-	
-		linhasTokens.addAll(tokensLinhaColunaLog.getTabelaSimbolos());
+		for(Token valor: listaToken) {
+			linhasTokens.add(valor.getToken());
+			LinhasColunas.add(valor.getLinhaColuna());
+		}
 		
-		LinhasColunas.addAll(tokensLinhaColunaLog.getLinhaColuna());
+	
 		
 		
 		Collections.reverse(linhasTokens);
@@ -877,7 +843,7 @@ public class AnalisadorSintatico {
 		
 	}
 	
-	void escreveLogs() throws IOException {
+	/*void escreveLogs() throws IOException {
 		
 		for (int i = 0; i < LOGS.size(); i++) {
 			tokensLinhaColunaLog.getLogSintatico().add(LOGS.get(i));
@@ -885,7 +851,7 @@ public class AnalisadorSintatico {
 		}
 		
 		
-	}
+	}*/
 	
 }
 

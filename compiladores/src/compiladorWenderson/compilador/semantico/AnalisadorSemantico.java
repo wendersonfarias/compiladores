@@ -8,8 +8,8 @@ import compiladorWenderson.compilador.TokensLinhaColunaLog;
 
 public class AnalisadorSemantico {
 
-	Stack<String> tokens= new Stack<String>();
-	Stack<String> linhaColuna= new Stack<String>();
+	List<String> tokens= new Stack<String>();
+	List<String> linhaColuna= new Stack<String>();
 	
 	TokensLinhaColunaLog tokensLinhaColunaLog = new TokensLinhaColunaLog();
 	
@@ -23,7 +23,7 @@ public class AnalisadorSemantico {
 	void analisaSemantica() {
 		
 		TabelaDeSimbolos tabela = new TabelaDeSimbolos();
-		String copia;
+
 		do {
 			if(tokens.peek().equals("var") || tokens.peek().equals("numero") ) {
 				copia = tokens.pop();

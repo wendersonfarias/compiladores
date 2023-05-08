@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 
+import compiladorWenderson.compilador.Token;
 import compiladorWenderson.compilador.TokensLinhaColunaLog;
 
 public class AnalisadorLexico {
@@ -16,10 +17,9 @@ public class AnalisadorLexico {
 	Integer numeroLinha ;
 	String lexema;
 	String fita ;
-	ArrayList<String> linhasTokens = new ArrayList<String>();
-	ArrayList<String> tabelaTokens = new ArrayList<String>();
-	ArrayList<String> tabelaLinhaColuna = new ArrayList<String>();
+	ArrayList<Token> tokens = new ArrayList<Token>();
 	TokensLinhaColunaLog tokensLinhaColunaLog = new TokensLinhaColunaLog();
+	
 	
 	
 	Integer tabulacao;
@@ -38,7 +38,7 @@ public class AnalisadorLexico {
 
 	
 
-	public TokensLinhaColunaLog analisaTokens(String nomeArquivo) throws IOException {
+	public ArrayList<Token> analisaTokens(String nomeArquivo) throws IOException {
 		tokensLinhaColunaLog.setErroLexico(false);
 		
 		InputStream fis =new FileInputStream(nomeArquivo);  
@@ -64,26 +64,9 @@ public class AnalisadorLexico {
 		
 		
 		
-		for (int i = 0; i < linhasTokens.size(); i++) {
-			tokensLinhaColunaLog.getToken().add(linhasTokens.get(i));
-		}
-		
-		
-		
-		
-		
-		for (int i = 0; i < tabelaTokens.size(); i++) {
-			tokensLinhaColunaLog.getTabelaSimbolos().add(tabelaTokens.get(i));
-			
-		}
-		
-		for (int i = 0; i < tabelaLinhaColuna.size(); i++) {
-			tokensLinhaColunaLog.getLinhaColuna().add(tabelaLinhaColuna.get(i));
-		}
-		
 		br.close();
 		
-		return tokensLinhaColunaLog;
+		return tokens;
 		
 	}
 
@@ -137,9 +120,6 @@ public class AnalisadorLexico {
 		}
 		else if(letra.equals(";")) {
 			this.estadoQ65();
-		}
-		else if(letra.equals(",")) {
-			estadoQ99();
 		}
 		else if(letra.equals(")")) {
 			this.estadoQ66();
@@ -381,41 +361,6 @@ public class AnalisadorLexico {
 		
 		 	 
 		
-	}
-
-	private void estadoQ99() {
-		//Reconhece comando  [ , ]
-		Character pulaLinha = Character.valueOf('\n');
-		String fimLinha = pulaLinha.toString();
-		String letra = obterCharacter();
-		String token = ",";
-		
-		 if(letra.equals(fimLinha)) {
-			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
-			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
-			this.setLexema("");
-			this.estadoQ0();
-
-			//termina a linha e reconhece o token
-		}else if(letra.equals(" ")|| letra.equals("\t")) {
-			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
-			this.setLexema("");
-			this.estadoQ0();
-			//reconhece um novo token e continua a reconhcer outro token
-		}else if(verificaCaractereEspecial(letra) || letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
-			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
-			this.setLexema("");
-			setCabeca(getCabeca() - 1); 
-			this.estadoQ0();
-			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
-		}
-		
-		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
-		}
 	}
 
 
@@ -1984,10 +1929,10 @@ public class AnalisadorLexico {
 	}
 
 	
-	public void salvaToken(String token, String lexema, Integer numeroLinha, Integer coluna) {
-		String newToken = token + " { " + lexema + " } (L"+ numeroLinha + " - C" + ((coluna-1) - lexema.length()+tabulacao) + " )";
-		linhasTokens.add(newToken);
-		tabelaTokens.add(token);
-		tabelaLinhaColuna.add("(Linha: "+ numeroLinha + " - Coluna: " + ((coluna-1) - lexema.length()+tabulacao) + " )");		
+	public void salvaToken(String token_, String lexema, Integer numeroLinha, Integer coluna) {
+		String linhaColuna = "(L"+ numeroLinha + " - C" + ((coluna-1) - lexema.length()+tabulacao) + " )";
+		Token token = new Token(token_, lexema, linhaColuna);
+		tokens.add(token);
+	
 	}
 }

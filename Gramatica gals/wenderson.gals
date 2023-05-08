@@ -53,17 +53,13 @@ var      	= identificador : "var"
 "<="
 ">="
 ">"
-","
 
 
 #NonTerminals
 <programa>
 <declaracao_recursiva>
 <declaracao>
-<atribuicao>
 <expressao>
-<condicional>
-<se>
 <senao>
 <termo>
 <proximo_termo>
@@ -73,8 +69,6 @@ var      	= identificador : "var"
 <multi_div>
 <expressao_logica>
 <operador_logico>
-<declaracao_var>
-<declarao_variaveis>
 #Grammar
 <programa>::= inicioprograma <declaracao_recursiva> fimprograma 
 |	î
@@ -82,19 +76,18 @@ var      	= identificador : "var"
 <declaracao_recursiva>::= <declaracao> ";" <declaracao_recursiva> |î
 ;
 
-<atribuicao>::= identificador  "=" <expressao> 
+<declaracao>::= identificador  "=" <expressao> 
 ;
 
 <declaracao>::= leia "(" identificador ")"
 ;
 <declaracao>::= escreva  <expressao>   
 ;
-<declaracao>::= var identificador <declarao_variaveis>
-;
-<declarao_variaveis>::=  "," identificador <declarao_variaveis> | î
+<declaracao>::= var identificador
 ;
 //Laco enquanto
-<declaracao>::= laco <expressao_logica>  <declaracao_recursiva> 
+<declaracao>::= laco <expressao_logica> <declaracao_recursiva> fimlaco
+
 ;
 
 // condicional se(){} senao ou vazio
