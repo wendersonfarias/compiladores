@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import compiladorWenderson.compilador.lexico.AnalisadorLexico;
 import compiladorWenderson.compilador.lexico.ListaTokens;
+import compiladorWenderson.compilador.semantico.AnalisadorSemantico;
 import compiladorWenderson.compilador.sintatico.AnalisadorSintatico;
 import compiladorWenderson.compilador.sintatico.ListaLog;
 
@@ -52,6 +53,8 @@ public class Compilador {
 		
 		if(listaToken != null) {
 			listaLogs = as.analisaSintatico();
+			AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(listaToken);
+			analisadorSemantico.analiseSemantica();
 		}else {
 			System.out.println("Não é possivel usar o analisador sintatico");
 		}

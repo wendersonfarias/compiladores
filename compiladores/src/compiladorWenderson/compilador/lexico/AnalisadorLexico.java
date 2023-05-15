@@ -698,7 +698,11 @@ public class AnalisadorLexico {
 		String letra = obterCharacter();
 		String token = "/";
 		
-		 if(letra.equals(fimLinha)) {
+		if(letra.equals("/")) {
+			estadoComentario();
+		
+		}
+		else if(letra.equals(fimLinha)) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -726,6 +730,14 @@ public class AnalisadorLexico {
 		}
 		
 		 
+		
+	}
+
+
+
+	private void estadoComentario() {
+		this.setLexema("");
+		return;
 		
 	}
 

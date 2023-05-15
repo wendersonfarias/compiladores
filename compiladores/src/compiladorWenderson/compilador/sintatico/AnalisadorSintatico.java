@@ -833,8 +833,6 @@ public class AnalisadorSintatico {
 		}
 		
 	
-		
-		
 		Collections.reverse(linhasTokens);
 		Collections.reverse(LinhasColunas);
 		
@@ -843,15 +841,6 @@ public class AnalisadorSintatico {
 		
 	}
 	
-	/*void escreveLogs() throws IOException {
-		
-		for (int i = 0; i < LOGS.size(); i++) {
-			tokensLinhaColunaLog.getLogSintatico().add(LOGS.get(i));
-			
-		}
-		
-		
-	}*/
 	
 }
 
