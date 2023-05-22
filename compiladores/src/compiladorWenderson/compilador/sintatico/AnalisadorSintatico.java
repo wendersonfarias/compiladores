@@ -214,11 +214,6 @@ public class AnalisadorSintatico {
 		
 		}while(!pilha.empty());
 		
-		//escreveLogs();
-		
-		if(ErroSintatico) {
-			return null;
-		}
 		return LOGS;
 	
 	}
@@ -839,6 +834,14 @@ public class AnalisadorSintatico {
 		this.tokens = linhasTokens;
 		this.linhasColunas = LinhasColunas;
 		
+	}
+
+
+
+
+
+	public Boolean getErro() {
+		return ErroSintatico;
 	}
 	
 	

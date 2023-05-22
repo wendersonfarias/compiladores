@@ -9,7 +9,6 @@ import java.io.Reader;
 import java.util.ArrayList;
 
 import compiladorWenderson.compilador.Token;
-import compiladorWenderson.compilador.TokensLinhaColunaLog;
 
 public class AnalisadorLexico {
 	
@@ -18,8 +17,7 @@ public class AnalisadorLexico {
 	String lexema;
 	String fita ;
 	ArrayList<Token> tokens = new ArrayList<Token>();
-	TokensLinhaColunaLog tokensLinhaColunaLog = new TokensLinhaColunaLog();
-	
+	Boolean erroLexico = false;
 	
 	
 	Integer tabulacao;
@@ -39,8 +37,6 @@ public class AnalisadorLexico {
 	
 
 	public ArrayList<Token> analisaTokens(String nomeArquivo) throws IOException {
-		tokensLinhaColunaLog.setErroLexico(false);
-		
 		InputStream fis =new FileInputStream(nomeArquivo);  
 		Reader isr = new InputStreamReader(fis);
 		BufferedReader br = new BufferedReader(isr);
@@ -146,7 +142,7 @@ public class AnalisadorLexico {
 		
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(), cabeca, letra);
+			imprimeErro(this.getNumeroLinha(), cabeca, letra,"");
 			this.setLexema("");
 			this.estadoQ0();
 		}
@@ -188,7 +184,7 @@ public class AnalisadorLexico {
 			//volta a cabeca porque o proximo poderá ser um outro token
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -276,7 +272,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
 		}
 		
 		 	 
@@ -316,7 +312,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
 		}
 		
 		 	 
@@ -356,7 +352,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
 		}
 		
 		 	 
@@ -399,7 +395,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
 		}
 		
 		
@@ -441,7 +437,7 @@ public class AnalisadorLexico {
 			this.estadoQ12();
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
 		}
 		
 		
@@ -481,7 +477,7 @@ public class AnalisadorLexico {
 			this.estadoQ12();
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
 		}
 		
 		
@@ -520,7 +516,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
 		}
 		
 		  
@@ -560,7 +556,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
 		}
 		
 		 		 
@@ -600,7 +596,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token);
 		}
 		
 		  
@@ -644,7 +640,7 @@ public class AnalisadorLexico {
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
 		}
 		
 		
@@ -1831,7 +1827,7 @@ public class AnalisadorLexico {
 			this.estadoQ12();
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
 		}
 		
 
@@ -1934,10 +1930,19 @@ public class AnalisadorLexico {
 		return false;
 	}
 	
-	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere ) {
+	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere,String token ) {
+		if(getLexema().length() > 1) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			
+		}
 		System.out.println("Erro Léxico ( Linha: " +  numeroLinha + " - Coluna: " 
-				+ ((coluna) - lexema.length()+tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
-		tokensLinhaColunaLog.setErroLexico(true);
+				+ ((coluna -1)  +tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
+		erroLexico = true;
+		setCabeca(getCabeca() - 1);
+		this.estadoQ0();
 	}
 
 	
@@ -1946,5 +1951,11 @@ public class AnalisadorLexico {
 		Token token = new Token(token_, lexema, linhaColuna);
 		tokens.add(token);
 	
+	}
+
+
+
+	public Boolean getErro() {
+		return erroLexico;
 	}
 }

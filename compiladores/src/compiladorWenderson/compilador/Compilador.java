@@ -14,17 +14,17 @@ public class Compilador {
 
 	public static void main(String[] args) throws IOException {
 		String arquivo = ""  ;
-		Boolean EscrevelistaTokens = false;
-		Boolean ListarLog = false;
+		Boolean listarLogTokens = false;
+		Boolean listarLogSintatico = false;
 		for (String arg : args) {
 			if(arg.equals("-tudo")) {
-				ListarLog= true;
-				EscrevelistaTokens = true;
+				listarLogSintatico= true;
+				listarLogTokens = true;
 			}
 			else if (arg.equals("-lt")) {
-            	EscrevelistaTokens = true;
+            	listarLogTokens = true;
             }else if(arg.equals("-ls")) {
-            	ListarLog= true;
+            	listarLogSintatico= true;
             }
             
             if(arg.contains("txt")) {
@@ -40,19 +40,20 @@ public class Compilador {
 			fis.close();
 			
 		}catch (Exception e) {
-			System.out.println("arquivo não encontrado");
+			System.out.println("arquivo fonte não encontrado");
 		}
 		
-		TokensLinhaColunaLog tokensLinhaColunaLog = new TokensLinhaColunaLog();
-		AnalisadorLexico an = new AnalisadorLexico();
+		AnalisadorLexico analisadorLexico = new AnalisadorLexico();
+		ArrayList<Token> listaToken = analisadorLexico.analisaTokens(arquivo);
+		Boolean erroLexico = analisadorLexico.getErro();
+		ArrayList<String> listaLogSinatico;
+	
 		
-		
-		ArrayList<Token> listaToken = an.analisaTokens(arquivo);
-		AnalisadorSintatico as = new AnalisadorSintatico(listaToken);
-		ArrayList<String> listaLogs = null;
-		
-		if(listaToken != null) {
-			listaLogs = as.analisaSintatico();
+		if(!erroLexico) {
+			AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(listaToken);
+			ArrayList<String> listaLogSintatico= analisadorSintatico.analisaSintatico(); 
+			Boolean erroSintatico = analisadorSintatico.getErro();
+			
 			AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(listaToken);
 			analisadorSemantico.analiseSemantica();
 		}else {
@@ -65,14 +66,14 @@ public class Compilador {
 		
 		
 		
-		if(EscrevelistaTokens) {
+		if(listarLogTokens) {
 			System.out.println("*****************************************Inicio Listagem Token******************************************************************");
 			new ListaTokens(listaToken).listaToken();
 			System.out.println("*****************************************Fim Listagem Token******************************************************************");
 		}
-		if(ListarLog && listaToken != null ) {
+		/*if(listarLogSintatico) {
 			new ListaLog(listaLogs).listaLog();
-		}
+		}*/
 			
 		
 		

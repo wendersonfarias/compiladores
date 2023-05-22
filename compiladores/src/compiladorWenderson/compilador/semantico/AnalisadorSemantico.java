@@ -128,7 +128,8 @@ public class AnalisadorSemantico {
             tabelaSimbolos.put(tokenAtual.getLexema(), false);
         }
         else if (buffer.toString().contains("/0")) {
-        	System.out.println("Divisao por 0" + tokenAtual.getLinhaColuna());
+        	System.out.println("Divisao por 0, " + tokenAtual.getLinhaColuna());
+        	return;
         }
         else {
         	tabelaSimbolos.put(tokenAtual.getLexema(), true);
@@ -199,7 +200,7 @@ public class AnalisadorSemantico {
 
 	private void verificaVariavelNaoDeclarada(Token tokenAtual) {
 	    if (!variavelDeclarada(tokenAtual)) {
-	    	System.out.println("A variavel: " + tokenAtual.getLexema() + " não foi declarada "
+	    	System.out.println("A variavel '" + tokenAtual.getLexema() + "' não foi declarada "
 	    			+ "anteriormente, " + tokenAtual.getLinhaColuna());
 	    }
 	}
