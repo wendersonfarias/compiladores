@@ -142,7 +142,7 @@ public class AnalisadorLexico {
 		
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(), cabeca, letra,"");
+			imprimeErro(this.getNumeroLinha(), cabeca, letra);
 			this.setLexema("");
 			this.estadoQ0();
 		}
@@ -160,7 +160,7 @@ public class AnalisadorLexico {
 		String fimLinha = pulaLinha.toString();
 		String token = "numero";
 		
-		if(letra.matches("\\d+")) {  //verifica se é um numero
+		if(letra.matches("\\d+")) {  //verifica se ï¿½ um numero
 			this.estadoQ71();
 		}else if(letra.equals(fimLinha)) {
 			if(this.getLexema().length() > 0) {
@@ -181,10 +181,10 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra);
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
@@ -225,7 +225,7 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
@@ -268,11 +268,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		 	 
@@ -308,11 +308,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		 	 
@@ -348,11 +348,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		 	 
@@ -391,11 +391,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		
@@ -431,13 +431,13 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		
@@ -471,13 +471,13 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		
@@ -512,11 +512,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		  
@@ -552,11 +552,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 		 		 
@@ -592,11 +592,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra);
 		}
 		
 		  
@@ -636,11 +636,11 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra ,token);
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra);
 		}
 		
 		
@@ -675,7 +675,7 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else { 
 			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
@@ -718,7 +718,7 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		
 		else { 
@@ -771,7 +771,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				
 				else { 
@@ -848,7 +848,7 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
@@ -948,7 +948,7 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
@@ -1066,7 +1066,7 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
@@ -1200,7 +1200,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1276,7 +1276,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1336,7 +1336,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1353,12 +1353,90 @@ public class AnalisadorLexico {
 		String letra = obterCharacter();
 		if(letra.equals("i")) {
 			estadoQ9();
+		}else if(letra.equals("a")) {
+			estadoQ100();
 		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
 		}else if(letra.equals(" ") || letra.equals("\t")) {
 			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
 			setCabeca(getCabeca()-1); 
 			estadoQ12();
+		}
+		else { 
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+		}
+		
+	}
+
+
+
+	private void estadoQ100() {
+		String letra = obterCharacter();
+		if(letra.equals("c")) {
+			estadoQ101();
+		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.estadoQ12();
+		}else if(letra.equals(" ") || letra.equals("\t")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			setCabeca(getCabeca()-1); 
+			estadoQ12();
+		}
+		else { 
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+		}
+		
+	}
+
+
+
+	private void estadoQ101() {
+		String letra = obterCharacter();
+		if(letra.equals("a")) {
+			estadoQ102();
+		}else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.estadoQ12();
+		}else if(letra.equals(" ") || letra.equals("\t")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			setCabeca(getCabeca()-1); 
+			estadoQ12();
+		}
+		else { 
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
+		}
+		
+	}
+
+
+
+	private void estadoQ102() {
+		//Reconhece comando  - faca -
+		Character pulaLinha = Character.valueOf('\n');
+		String fimLinha = pulaLinha.toString();
+		String letra = obterCharacter();
+		String token = "faca";
+		
+		if(letra.equals(fimLinha)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1));
+			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
+			this.setLexema("");
+			//termina a linha e reconhece o token
+		}else if(letra.equals(" ") || letra.equals("\t")) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
+			this.setLexema("");
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+		}else if(verificaCaractereEspecial(letra)) {
+			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
+			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
+			this.setLexema("");
+			setCabeca(getCabeca() - 1); 
+			this.estadoQ0();
+			//reconhece um novo token e continua a reconhcer outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
+		}
+		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
+			this.estadoQ12();
 		}
 		else { 
 			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
@@ -1492,7 +1570,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1549,7 +1627,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1588,7 +1666,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1763,7 +1841,7 @@ public class AnalisadorLexico {
 					setCabeca(getCabeca() - 1); 
 					this.estadoQ0();
 					//reconhece um novo token e continua a reconhcer outro token
-					//volta a cabeca porque o proximo poderá ser um outro token
+					//volta a cabeca porque o proximo poderï¿½ ser um outro token
 				}
 				else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 					this.estadoQ12();
@@ -1821,13 +1899,13 @@ public class AnalisadorLexico {
 			setCabeca(getCabeca() - 1); 
 			this.estadoQ0();
 			//reconhece um novo token e continua a reconhcer outro token
-			//volta a cabeca porque o proximo poderá ser um outro token
+			//volta a cabeca porque o proximo poderï¿½ ser um outro token
 		}
 		else if(letra.matches("\\d+") || Character.isLetter(letra.charAt(0))) {
 			this.estadoQ12();
 		}
 		else { 
-			imprimeErro(this.getNumeroLinha(),getCabeca(),letra,token );
+			imprimeErro(this.getNumeroLinha(),getCabeca(),letra );
 		}
 		
 
@@ -1930,15 +2008,8 @@ public class AnalisadorLexico {
 		return false;
 	}
 	
-	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere,String token ) {
-		if(getLexema().length() > 1) {
-			this.setLexema(this.getLexema().substring(0, this.getLexema().length() - 1)); 
-			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
-			this.setLexema("");
-			setCabeca(getCabeca() - 1); 
-			
-		}
-		System.out.println("Erro Léxico ( Linha: " +  numeroLinha + " - Coluna: " 
+	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere ) {
+		System.out.println("Erro Lï¿½xico ( Linha: " +  numeroLinha + " - Coluna: " 
 				+ ((coluna -1)  +tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
 		erroLexico = true;
 		setCabeca(getCabeca() - 1);

@@ -6,10 +6,10 @@ iniciop
 
     fatorial=1;
 
-    laco( numero > 1 )
+    laco( numero > 1 ) faca
         fatorial = fatorial * numero;
         numero = numero - 1;
-    fimlaco
+    fimlaco;
 
     
     escreva(fatorial);

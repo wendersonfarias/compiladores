@@ -1,7 +1,7 @@
 iniciop
     var num;  
     leia(num);
-    laco(num < 0)
+    laco(num < 0) faca
         num = num - 1;
-    fimlaco
+    fimlaco;
 fimp

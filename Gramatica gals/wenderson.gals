@@ -39,6 +39,8 @@ leia    		= identificador : "leia"
 escreva    	= identificador : "escreva"
 
 var      	= identificador : "var"
+faca  		= identificador : "faca"	
+entao		= identificador : "entao"	
 
 "("
 ")"
@@ -86,12 +88,12 @@ var      	= identificador : "var"
 <declaracao>::= var identificador
 ;
 //Laco enquanto
-<declaracao>::= laco <expressao_logica> <declaracao_recursiva> fimlaco
+<declaracao>::= laco <expressao_logica>  faca <declaracao_recursiva> fimlaco
 
 ;
 
 // condicional se(){} senao ou vazio
-<declaracao>::= se <expressao_logica> <declaracao_recursiva> <senao> fimse
+<declaracao>::= se <expressao_logica> entao <declaracao_recursiva> <senao> fimse
 ;
 <senao>::= senao <declaracao_recursiva>   |  î
 ;

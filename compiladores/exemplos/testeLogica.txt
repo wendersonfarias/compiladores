@@ -2,11 +2,11 @@ iniciop
    var num;
     leia(num);
 
-    se( num > 7 )
+    se( num > 7 ) entao
         escreva(1);
     senao
-        se( num < 7 )
+        se( num < 7 ) entao
             escreva(0);
-        fimse
-    fimse
+        fimse;
+    fimse;
 fimp

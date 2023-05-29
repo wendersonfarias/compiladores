@@ -1,3 +1,5 @@
 iniciop
-se(escreva(leia(%$)))
+
+var a;
+a = a / 0;
 fimp

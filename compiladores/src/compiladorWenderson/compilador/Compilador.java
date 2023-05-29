@@ -3,7 +3,9 @@ package compiladorWenderson.compilador;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
+import compiladorWenderson.compilador.codigoIntermediario.CodigoIntermediario;
 import compiladorWenderson.compilador.lexico.AnalisadorLexico;
 import compiladorWenderson.compilador.lexico.ListaTokens;
 import compiladorWenderson.compilador.semantico.AnalisadorSemantico;
@@ -40,13 +42,13 @@ public class Compilador {
 			fis.close();
 			
 		}catch (Exception e) {
-			System.out.println("arquivo fonte não encontrado");
+			System.out.println("arquivo fonte nï¿½o encontrado");
 		}
 		
 		AnalisadorLexico analisadorLexico = new AnalisadorLexico();
 		ArrayList<Token> listaToken = analisadorLexico.analisaTokens(arquivo);
 		Boolean erroLexico = analisadorLexico.getErro();
-		ArrayList<String> listaLogSinatico;
+		//ArrayList<String> listaLogSintatico;
 	
 		
 		if(!erroLexico) {
@@ -55,9 +57,10 @@ public class Compilador {
 			Boolean erroSintatico = analisadorSintatico.getErro();
 			
 			AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(listaToken);
-			analisadorSemantico.analiseSemantica();
+			Map<String, Boolean> tabelaSimbolos = analisadorSemantico.analiseSemantica();
+			//CodigoIntermediario codigoIntermediario = new CodigoIntermediario();
 		}else {
-			System.out.println("Não é possivel usar o analisador sintatico");
+			System.out.println("Não possivel usar o analisador sintatico");
 		}
 		
 		

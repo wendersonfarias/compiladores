@@ -7,12 +7,12 @@ iniciop
 
     leia(num);
 
-    se(num > 5)
+    se(num > 5) entao
         aux = ((2 * 2) + (6 / 2)) + 12;
     senao
         escreva(0);
-   	fimse
+   	fimse;
 
    	escreva(aux);
 
-fimp;
+fimp

@@ -1,0 +1,32 @@
+iniciop
+
+
+
+var linhaAtual;
+linhaAtual = 0;
+
+var coeficiente;
+
+var posicaoAtual;
+posicaoAtual = 0;
+
+
+var numeroLinhas;
+leia(numeroLinhas);
+
+	laco ( linhaAtual < numeroLinhas ) FACA
+		coeficiente = 1;
+		
+		laco ( posicaoAtual <= linhaAtual ) FACA
+			escreva(coeficiente);
+			coeficiente = coeficiente * (linhaAtual - posicaoAtual) / (posicaoAtual + 1);
+			
+		FIMLACO;
+		//calcula o coeficiente binomial para cada número da linha, 
+		//com base nos coeficientes anteriores.
+		
+		linhaAtual = linhaAtual + 1;
+		
+		escreva(0);
+	FIMLACO;
+fimp

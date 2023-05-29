@@ -12,6 +12,7 @@ public class AnalisadorSemantico {
 	
 	private ArrayList<Token> listaToken;
 	
+	private Boolean erroSemantico = false;
 	private Integer indice ;
 	
 	
@@ -22,10 +23,10 @@ public class AnalisadorSemantico {
 	}
 
 	
-	public ArrayList<String> analiseSemantica() {
+	public Map<String, Boolean> analiseSemantica() {
 		indice = 0;
 		Token token;
-		while(indice < getListaToken().size()) {
+		while(indice < getListaToken().size() && !erroSemantico) {
 			token = getListaToken().get(indice);
 			
 			if (token.getToken().equals("var")) {
@@ -46,7 +47,7 @@ public class AnalisadorSemantico {
 			
 		
 		
-		return null;
+		return tabelaSimbolos;
 		
 	}
 	
@@ -110,6 +111,7 @@ public class AnalisadorSemantico {
 	private void verificaVariavelJaDeclarada(Token tokenAtual) {
         if (variavelDeclarada(tokenAtual)) {
         	System.out.println("A variavel '" + tokenAtual.getLexema() + "' já está declarado" +  tokenAtual.getLinhaColuna());
+        	erroSemantico = true;
         }
     }
 	
@@ -126,15 +128,24 @@ public class AnalisadorSemantico {
 	private void verificaValorVariavel(StringBuilder buffer, Token tokenAtual) {
         if ("0".equals(buffer.toString())) {
             tabelaSimbolos.put(tokenAtual.getLexema(), false);
+            System.out.println("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
         }
         else if (buffer.toString().contains("/0")) {
-        	System.out.println("Divisao por 0, " + tokenAtual.getLinhaColuna());
+        	System.out.println();
+        	System.out.println("** \tErro Semantico!                           **");
+        	System.out.println("**    Divisao por 0, " + tokenAtual.getLinhaColuna());
+        	System.out.println();
+        	System.out.println("** Nao eh possivel continuar a analise semantica! **");
+        	System.out.println("** Corrija os erros! e tente novamente.           **");
+        	System.out.println();
+        	erroSemantico = true;
         	return;
         }
         else {
         	tabelaSimbolos.put(tokenAtual.getLexema(), true);
+        	System.out.println("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
         }
-        System.out.println("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
+        
     }
 	
 	/**
@@ -202,6 +213,9 @@ public class AnalisadorSemantico {
 	    if (!variavelDeclarada(tokenAtual)) {
 	    	System.out.println("A variavel '" + tokenAtual.getLexema() + "' não foi declarada "
 	    			+ "anteriormente, " + tokenAtual.getLinhaColuna());
+	    	erroSemantico = true;
+	    	System.out.println("** Nao eh possivel continuar a analise semantica! **");
+        	System.out.println("** Corrija os erros! e tente novamente.           **");
 	    }
 	}
 	
