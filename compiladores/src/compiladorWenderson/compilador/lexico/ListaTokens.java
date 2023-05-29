@@ -22,24 +22,16 @@ public class ListaTokens {
 
 
 
-	public  void listaToken() throws IOException {
-			
-			OutputStream fos = System.out;  
-			Writer osw = new OutputStreamWriter(fos);
-			BufferedWriter bw = new BufferedWriter(osw);
-			String item;
-	
-			for (Token token : listaToken) {
+public ArrayList<String> listaToken() {
+		ArrayList<String> listaTokens = new ArrayList<String>();
+		String item;
+		for (Token token : listaToken) {
 				item ="| Token: " + 
 								token.getToken()  
 				+ " | Lexema: " + token.getLexema()   + " | "+ token.getLinhaColuna();
-				bw.write(item);
-				bw.newLine();
-				bw.flush();
-			}
-			
-			bw.close();
-
+				listaTokens.add(item);	
+		}
+	return listaTokens;
 	}
 	
 }

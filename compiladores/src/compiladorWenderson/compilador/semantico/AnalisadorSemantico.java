@@ -14,6 +14,8 @@ public class AnalisadorSemantico {
 	
 	private Boolean erroSemantico = false;
 	private Integer indice ;
+	private Boolean condiconal = false;
+	private  ArrayList<String> logSemantico = new ArrayList<String>();
 	
 	
 
@@ -41,6 +43,9 @@ public class AnalisadorSemantico {
             else if (token.getToken().equals("leia")) {
                marcarArgumentoLeituraComoAtribuido();
             }
+            else if (token.getToken().equals("fimse") || token.getToken().equals("fimlaco")) {
+                condiconal = false;
+            }
 			indice++;
         }
 			
@@ -60,15 +65,34 @@ public class AnalisadorSemantico {
 	 */
 	public void verificaDeclaracaoDaVariavel(Token token) {
 		var proximoToken = listaToken.get(indice + 1 );
-		verificaVariavelJaDeclarada(proximoToken);
-		tabelaSimbolos.put(proximoToken.getLexema(), false);
-		System.out.println("A variavel '" + proximoToken.getLexema() + "' foi declarada");
+		if(!verificaVariavelJaDeclarada(proximoToken) && !verificaVariavelDeclaradaLacoCondicional(token)) {
+			tabelaSimbolos.put(proximoToken.getLexema(), false);
+			adicionaLog("A variavel '" + proximoToken.getLexema() + "' foi declarada");
+		}
+		
 		
 		
 	}
 	
 	
 	
+	private Boolean verificaVariavelDeclaradaLacoCondicional(Token tokenAtual) {
+		if(condiconal) {
+			System.out.println();
+        	System.out.println("** \tErro Semantico!                           **");
+        	System.out.println("**    Variavel declarada em condicional ou laco de repeticao, " + tokenAtual.getLinhaColuna());
+        	System.out.println();
+        	System.out.println("** Nao eh possivel continuar a analise semantica! **");
+        	System.out.println("** Corrija os erros! e tente novamente.           **");
+        	System.out.println();
+        	erroSemantico = true;
+        	return true;
+		}
+		return false;
+		
+	}
+
+
 	/**
 	 * Verifica a presença e o tratamento de uma variável em uma expressão.
 	 *
@@ -97,7 +121,7 @@ public class AnalisadorSemantico {
         var proximoToken = getListaToken().get(argumento_lido);
         verificaVariavelNaoDeclarada(proximoToken);
         tabelaSimbolos.put(proximoToken.getLexema(), true);
-        System.out.println("A variavel '" + proximoToken.getLexema() + "' e um valor a ser lido");
+        adicionaLog("A variavel '" + proximoToken.getLexema() + "' e um valor a ser lido");
     }
 	
 	
@@ -108,11 +132,13 @@ public class AnalisadorSemantico {
 	 *
 	 * @param tokenAtual O token que representa a variável atual.
 	 */
-	private void verificaVariavelJaDeclarada(Token tokenAtual) {
+	private Boolean verificaVariavelJaDeclarada(Token tokenAtual) {
         if (variavelDeclarada(tokenAtual)) {
         	System.out.println("A variavel '" + tokenAtual.getLexema() + "' já está declarado" +  tokenAtual.getLinhaColuna());
         	erroSemantico = true;
+        	return true;
         }
+        return false;
     }
 	
 	/**
@@ -128,7 +154,7 @@ public class AnalisadorSemantico {
 	private void verificaValorVariavel(StringBuilder buffer, Token tokenAtual) {
         if ("0".equals(buffer.toString())) {
             tabelaSimbolos.put(tokenAtual.getLexema(), false);
-            System.out.println("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
+            adicionaLog("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
         }
         else if (buffer.toString().contains("/0")) {
         	System.out.println();
@@ -143,7 +169,7 @@ public class AnalisadorSemantico {
         }
         else {
         	tabelaSimbolos.put(tokenAtual.getLexema(), true);
-        	System.out.println("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
+        	adicionaLog("A variavel '%s' recebeu o valor: '%s'".formatted(tokenAtual.getLexema(), buffer));
         }
         
     }
@@ -191,20 +217,21 @@ public class AnalisadorSemantico {
 	
 	/**
 	 * Verifica os argumentos condicionais dentro de um parêntese.
-	 * O método percorre a lista de tokens enquanto o token atual não for um parêntese de fechamento (')').
+	 * O método percorre a lista de tokens enquanto o token atual não for entao.
 	 * Para cada token encontrado, verifica se é um token identificador ("id").
 	 * Se for um token identificador, chama o método 'verificaVariavelNaoDeclarada' para verificar se a variável não foi declarada anteriormente.
 	 *
 	 * A variável 'indice' é incrementada dentro do loop, indicando o avanço para o próximo token.
 	 */
 	private void verificaArgumentoCondicional() {
-        while (!getListaToken().get(indice++).getToken().equals(")") ) {
+        while (!getListaToken().get(indice++).getToken().equals("faca") ) {
             Token tokenAtual = getListaToken().get(indice);
             if (tokenAtual.getToken().equals("id")) {
             	verificaVariavelNaoDeclarada(tokenAtual);
             }
         }
         indice--;
+        condiconal = true;
     }
 	
 	
@@ -237,6 +264,17 @@ public class AnalisadorSemantico {
 
 	public void setListaToken(ArrayList<Token> listaToken) {
 		this.listaToken = listaToken;
+	}
+
+	private void adicionaLog(String log) {
+		logSemantico.add(log);
+	}
+	public Boolean getErro() {
+		return	erroSemantico;
+	}
+	
+	public ArrayList<String> getLogSemantico() {
+		return logSemantico;
 	}
 	
 	

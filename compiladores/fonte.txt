@@ -1,5 +1,3 @@
 iniciop
 
-var a;
-a = a / 0;
 fimp

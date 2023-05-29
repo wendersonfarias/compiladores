@@ -18,6 +18,7 @@ public class Compilador {
 		String arquivo = ""  ;
 		Boolean listarLogTokens = false;
 		Boolean listarLogSintatico = false;
+		Boolean listarLogSemantico = false;
 		for (String arg : args) {
 			if(arg.equals("-tudo")) {
 				listarLogSintatico= true;
@@ -27,6 +28,9 @@ public class Compilador {
             	listarLogTokens = true;
             }else if(arg.equals("-ls")) {
             	listarLogSintatico= true;
+            }
+            else if(arg.equals("-lse")) {
+            	listarLogSemantico= true;
             }
             
             if(arg.contains("txt")) {
@@ -42,41 +46,59 @@ public class Compilador {
 			fis.close();
 			
 		}catch (Exception e) {
-			System.out.println("arquivo fonte nï¿½o encontrado");
+			System.out.println("arquivo fonte nao encontrado");
 		}
 		
 		AnalisadorLexico analisadorLexico = new AnalisadorLexico();
 		ArrayList<Token> listaToken = analisadorLexico.analisaTokens(arquivo);
 		Boolean erroLexico = analisadorLexico.getErro();
-		//ArrayList<String> listaLogSintatico;
-	
+
+		ArrayList<String> logSintatico = new ArrayList<String>();
+		ArrayList<String> logSemantico= new ArrayList<String>();
+		ArrayList<String> logCodigoIntermediario= new ArrayList<String>();
+		ArrayList<String> codigoIntermediario = new ArrayList<String>();
 		
+		Boolean erroSintatico;
+		Boolean erroSemantico;
+		
+		ArrayList<String> logEscreverConsole = new ArrayList<String>();
+	
+		if(listarLogTokens) {
+			logEscreverConsole.addAll(new ListaTokens(listaToken).listaToken());
+		}
 		if(!erroLexico) {
 			AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(listaToken);
-			ArrayList<String> listaLogSintatico= analisadorSintatico.analisaSintatico(); 
-			Boolean erroSintatico = analisadorSintatico.getErro();
+			logSintatico = analisadorSintatico.analisaSintatico(); 
+			erroSintatico = analisadorSintatico.getErro();
 			
-			AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(listaToken);
-			Map<String, Boolean> tabelaSimbolos = analisadorSemantico.analiseSemantica();
-			//CodigoIntermediario codigoIntermediario = new CodigoIntermediario();
+			if(listarLogSintatico) {
+				logEscreverConsole.addAll(logSintatico);
+			}
+			
+			if(!erroSintatico) {
+				AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(listaToken);
+				Map<String, Boolean> tabelaSimbolos = analisadorSemantico.analiseSemantica();
+				erroSemantico =  analisadorSemantico.getErro();
+				logSemantico = analisadorSemantico.getLogSemantico();
+				
+				if(listarLogSintatico) {
+					logEscreverConsole.addAll(logSintatico);
+				}
+				
+				if(!erroSemantico) {
+					CodigoIntermediario gerarCodigoIntermediario = new CodigoIntermediario( listaToken, tabelaSimbolos);
+					codigoIntermediario = gerarCodigoIntermediario.gerarCodigoIntermediario();
+					logCodigoIntermediario = gerarCodigoIntermediario.retornaLogIntermediario();
+				}
+			}
+			
+			
 		}else {
 			System.out.println("Não possivel usar o analisador sintatico");
 		}
 		
 		
-		
-		
-		
-		
-		
-		if(listarLogTokens) {
-			System.out.println("*****************************************Inicio Listagem Token******************************************************************");
-			new ListaTokens(listaToken).listaToken();
-			System.out.println("*****************************************Fim Listagem Token******************************************************************");
-		}
-		/*if(listarLogSintatico) {
-			new ListaLog(listaLogs).listaLog();
-		}*/
+	
 			
 		
 		

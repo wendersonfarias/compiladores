@@ -9,7 +9,7 @@ import compiladorWenderson.compilador.util.Infixa_posfixa;
 public class CodigoIntermediario {
 
 	private ArrayList<Token> 		listaToken;
-	private ArrayList<String> 		logIntermediario = new ArrayList<String>();
+	//private ArrayList<String> 		logIntermediario = new ArrayList<String>();
 	private ArrayList<String> 		registarLog = new ArrayList<String>();
 	private String					comando;
 	private ArrayList<String>		codigoIntermediario = new ArrayList<String>();
@@ -20,13 +20,16 @@ public class CodigoIntermediario {
 		this.tabelaSimbolos = tabela;
 	}
 	
-	void gerarCodigoIntermediario(){
+	public ArrayList<String>  gerarCodigoIntermediario(){
+		codigoIntermediario.add("Inicio do codigo intermediario");
+		
 		for(String variavel : tabelaSimbolos.keySet()) {
 			codigoIntermediario.add("_Var "+ variavel);
 			registarLog.add("Declaracao da variavel "+ variavel);
 		}
 		Integer i = 0;
 		
+		//converte as producoes  
 		while(i < listaToken.size()) {
 			comando = "";
 			if(listaToken.get(i).getToken().equals("leia")) {
@@ -54,34 +57,54 @@ public class CodigoIntermediario {
 					++i;
 				}
 				
-				codigoIntermediario.add(Infixa_posfixa.infixa_posfixa(comando));
+				codigoIntermediario.add(comando);
 				registarLog.add("Comando para escrever em tela");
 			}else if(listaToken.get(i).getToken().equals("laco")) {
 				i = i + 1 ;
 				comando = "enquanto ";
 				
-				while(!listaToken.get(i).getToken().equals(";")) {
+				while(!listaToken.get(i).getToken().equals(";") && !listaToken.get(i+1).getToken().equals("faca")) {
 					comando += " " +listaToken.get(i).getLexema();
 					++i;
 				}
 				codigoIntermediario.add(comando);
-				registarLog.add("Reconhecido comando enquanto");
+				registarLog.add("Reconhecido comando repecitao (enquanto)");
 			}else if(listaToken.get(i).getToken().equals("fimlaco")) {
-				comando = "fim_enquanto";
+				comando = "fim_enquanto ";
 				i = i+ 1 ;
 				codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando fim_enquanto");
 			}else if(listaToken.get(i).getToken().equals("se")) {
-				 comando = "se";
+				 comando = "se ";
 				 i = i + 1;
-				 while(!listaToken.get(i).getToken().equals("senao")) {
+				 while(!listaToken.get(i).getToken().equals("entao")) {
 						comando += " " +listaToken.get(i).getLexema();
 						++i;
-				}
+				 }
+				 comando = comando  + " entao";
+				 codigoIntermediario.add(comando);
+				 registarLog.add("Reconhecido comando condicional (se entao) ");
+			}else if(listaToken.get(i).getToken().equals("senao")) {
+				 comando = "senao ";
+				 i = i + 1;
+				 codigoIntermediario.add(comando);
+				 registarLog.add("Reconhecido complemento do comando condiconal (senao) ");
+			}
+			else if(listaToken.get(i).getToken().equals("fimse")) {
+				 comando = "fimse ";
+				 i = i + 1;
+				 codigoIntermediario.add(comando);
+				 registarLog.add("Reconhecido termino do comando condiconal (fimse) ");
+			}else {
+				i = i + 1 ;
 			}
 		}
 		
+		return codigoIntermediario;
 	}
 	
+	public ArrayList<String>  retornaLogIntermediario(){
+		return registarLog;
+	}
 	
 }
