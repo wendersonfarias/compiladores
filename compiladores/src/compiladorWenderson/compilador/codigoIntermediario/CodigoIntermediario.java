@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import compiladorWenderson.compilador.Token;
-import compiladorWenderson.compilador.util.Infixa_posfixa;
+import compiladorWenderson.compilador.util.Infix_posfix2;
 
 public class CodigoIntermediario {
 
@@ -22,7 +22,7 @@ public class CodigoIntermediario {
 	
 	public ArrayList<String>  gerarCodigoIntermediario(){
 		codigoIntermediario.add("Inicio do codigo intermediario");
-		
+	  Infix_posfix2 infix_posfix = new Infix_posfix2();
 		for(String variavel : tabelaSimbolos.keySet()) {
 			codigoIntermediario.add("_Var "+ variavel);
 			registarLog.add("Declaracao da variavel "+ variavel);
@@ -41,23 +41,25 @@ public class CodigoIntermediario {
 				i += 1;
 				
 				while(!listaToken.get(i).getToken().equals(";")) {
-					comando += " " + listaToken.get(i).getLexema();
+					comando += "" + listaToken.get(i).getLexema();
 					++i;
 				}
 				
-				codigoIntermediario.add(variavel + " = " + Infixa_posfixa.infixa_posfixa(comando) );
+				
+				codigoIntermediario.add(variavel + " = " + infix_posfix.InFixToPosFix(comando) );
 				registarLog.add("Expressao atribuida para variavel " + variavel);
 				
 			}else if(listaToken.get(i).getToken().equals("escreva")) {
 				comando = "escreva ";
+				String expressao = "";
 				i += 1;
 				
 				while(!listaToken.get(i).getToken().equals(";")) {
-					comando += " " + listaToken.get(i).getLexema();
+					expressao += "" + listaToken.get(i).getLexema();
 					++i;
 				}
 				
-				codigoIntermediario.add(comando);
+				codigoIntermediario.add(comando + infix_posfix.InFixToPosFix(expressao));
 				registarLog.add("Comando para escrever em tela");
 			}else if(listaToken.get(i).getToken().equals("laco")) {
 				i = i + 1 ;

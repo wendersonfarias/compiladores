@@ -14,7 +14,7 @@ public class AnalisadorSemantico {
 	
 	private Boolean erroSemantico = false;
 	private Integer indice ;
-	private Boolean condiconal = false;
+	private Integer condiconal = 0;
 	private  ArrayList<String> logSemantico = new ArrayList<String>();
 	
 	
@@ -44,7 +44,7 @@ public class AnalisadorSemantico {
                marcarArgumentoLeituraComoAtribuido();
             }
             else if (token.getToken().equals("fimse") || token.getToken().equals("fimlaco")) {
-                condiconal = false;
+                condiconal--;
             }
 			indice++;
         }
@@ -77,7 +77,7 @@ public class AnalisadorSemantico {
 	
 	
 	private Boolean verificaVariavelDeclaradaLacoCondicional(Token tokenAtual) {
-		if(condiconal) {
+		if(condiconal>0) {
 			System.out.println();
         	System.out.println("** \tErro Semantico!                           **");
         	System.out.println("**    Variavel declarada em condicional ou laco de repeticao, " + tokenAtual.getLinhaColuna());
@@ -223,15 +223,15 @@ public class AnalisadorSemantico {
 	 *
 	 * A variável 'indice' é incrementada dentro do loop, indicando o avanço para o próximo token.
 	 */
-	private void verificaArgumentoCondicional() {
-        while (!getListaToken().get(indice++).getToken().equals("faca") ) {
+	private void verificaArgumentoCondicional() {// verifico sem tem faca ou entao
+        while (!getListaToken().get(indice++).getToken().equals("faca") && !getListaToken().get(indice).getToken().equals("entao") ) {
             Token tokenAtual = getListaToken().get(indice);
             if (tokenAtual.getToken().equals("id")) {
             	verificaVariavelNaoDeclarada(tokenAtual);
             }
         }
         indice--;
-        condiconal = true;
+        condiconal++;
     }
 	
 	

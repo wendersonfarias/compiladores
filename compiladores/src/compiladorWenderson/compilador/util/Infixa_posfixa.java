@@ -14,28 +14,43 @@ public class Infixa_posfixa {
         precedence.put('-', 1);
         precedence.put('*', 2);
         precedence.put('/', 2);
+        
 
-        for (char c : infixExpression.toCharArray()) {
+        for (Character c : infixExpression.toCharArray()) {
             if (Character.isLetterOrDigit(c)) {
                 postfixExpression.append(c);
             } else if (c == '(') {
                 operatorStack.push(c);
             } else if (c == ')') {
                 while (!operatorStack.isEmpty() && operatorStack.peek() != '(') {
-                    postfixExpression.append(operatorStack.pop());
+                	postfixExpression.append(" ");
+                	postfixExpression.append(operatorStack.pop());
                 }
-                if (!operatorStack.isEmpty() && operatorStack.peek() == '(') {
+                if (!operatorStack.isEmpty() && operatorStack.peek() != '(') {
+                	return null;
+                }else {
                     operatorStack.pop();
+
                 }
             } else {
-                while (!operatorStack.isEmpty() && precedence.get(c) <= precedence.get(operatorStack.peek())) {
-                    postfixExpression.append(operatorStack.pop());
-                }
-                operatorStack.push(c);
+            	System.out.println(c);
+            	System.out.println(precedence.get(c));
+            	if(!c.equals(null) ) {
+	                while (!operatorStack.isEmpty() && precedence.get(c) <= precedence.get(operatorStack.peek())) {
+	                	postfixExpression.append(" ");
+	                    postfixExpression.append(operatorStack.pop());
+	                }
+	                postfixExpression.append(" ");
+	                operatorStack.push(c);
+            	} 
             }
         }
 
         while (!operatorStack.isEmpty()) {
+        	if(operatorStack.peek() == '(') {
+        		return null;
+        	}
+        	postfixExpression.append(" ");
             postfixExpression.append(operatorStack.pop());
         }
 
