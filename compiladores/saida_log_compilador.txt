@@ -3,152 +3,86 @@ Inicio da listagem dos token
 
 
 | Token: inicioprograma | Lexema: iniciop | (L1 - C0 )
-| Token: var | Lexema: var | (L3 - C0 )
-| Token: id | Lexema: a | (L3 - C4 )
-| Token: ; | Lexema: ; | (L3 - C5 )
-| Token: var | Lexema: var | (L4 - C0 )
-| Token: id | Lexema: b | (L4 - C4 )
-| Token: ; | Lexema: ; | (L4 - C5 )
 | Token: var | Lexema: var | (L5 - C0 )
-| Token: id | Lexema: c | (L5 - C4 )
-| Token: ; | Lexema: ; | (L5 - C5 )
-| Token: leia | Lexema: leia | (L7 - C0 )
-| Token: ( | Lexema: ( | (L7 - C4 )
-| Token: id | Lexema: a | (L7 - C5 )
-| Token: ) | Lexema: ) | (L7 - C6 )
-| Token: ; | Lexema: ; | (L7 - C7 )
-| Token: leia | Lexema: leia | (L8 - C0 )
-| Token: ( | Lexema: ( | (L8 - C4 )
-| Token: id | Lexema: b | (L8 - C5 )
-| Token: ) | Lexema: ) | (L8 - C6 )
-| Token: ; | Lexema: ; | (L8 - C7 )
-| Token: leia | Lexema: leia | (L9 - C0 )
-| Token: ( | Lexema: ( | (L9 - C4 )
-| Token: id | Lexema: c | (L9 - C5 )
-| Token: ) | Lexema: ) | (L9 - C6 )
-| Token: ; | Lexema: ; | (L9 - C7 )
-| Token: se | Lexema: se | (L11 - C4 )
-| Token: ( | Lexema: ( | (L11 - C6 )
-| Token: id | Lexema: a | (L11 - C8 )
-| Token: + | Lexema: + | (L11 - C10 )
-| Token: id | Lexema: b | (L11 - C12 )
-| Token: > | Lexema: > | (L11 - C15 )
-| Token: id | Lexema: c | (L11 - C17 )
-| Token: ) | Lexema: ) | (L11 - C18 )
-| Token: entao | Lexema: entao | (L11 - C20 )
-| Token: se | Lexema: se | (L12 - C8 )
-| Token: ( | Lexema: ( | (L12 - C10 )
-| Token: id | Lexema: a | (L12 - C11 )
-| Token: + | Lexema: + | (L12 - C13 )
-| Token: id | Lexema: c | (L12 - C15 )
-| Token: > | Lexema: > | (L12 - C17 )
-| Token: id | Lexema: b | (L12 - C19 )
-| Token: ) | Lexema: ) | (L12 - C20 )
-| Token: entao | Lexema: entao | (L12 - C22 )
-| Token: se | Lexema: se | (L13 - C12 )
-| Token: ( | Lexema: ( | (L13 - C14 )
-| Token: id | Lexema: b | (L13 - C15 )
-| Token: + | Lexema: + | (L13 - C17 )
-| Token: id | Lexema: c | (L13 - C19 )
-| Token: > | Lexema: > | (L13 - C21 )
-| Token: id | Lexema: a | (L13 - C23 )
-| Token: ) | Lexema: ) | (L13 - C24 )
-| Token: entao | Lexema: entao | (L13 - C26 )
-| Token: se | Lexema: se | (L15 - C16 )
-| Token: ( | Lexema: ( | (L15 - C18 )
-| Token: id | Lexema: a | (L15 - C20 )
-| Token: == | Lexema: == | (L15 - C22 )
-| Token: id | Lexema: b | (L15 - C25 )
-| Token: ) | Lexema: ) | (L15 - C27 )
-| Token: entao | Lexema: entao | (L15 - C29 )
-| Token: se | Lexema: se | (L16 - C20 )
-| Token: ( | Lexema: ( | (L16 - C22 )
-| Token: id | Lexema: a | (L16 - C24 )
-| Token: == | Lexema: == | (L16 - C26 )
-| Token: id | Lexema: c | (L16 - C29 )
-| Token: ) | Lexema: ) | (L16 - C31 )
-| Token: entao | Lexema: entao | (L16 - C33 )
-| Token: escreva | Lexema: escreva | (L17 - C24 )
-| Token: ( | Lexema: ( | (L17 - C31 )
-| Token: numero | Lexema: 1 | (L17 - C32 )
-| Token: ) | Lexema: ) | (L17 - C33 )
-| Token: ; | Lexema: ; | (L17 - C34 )
-| Token: senao | Lexema: senao | (L18 - C20 )
-| Token: escreva | Lexema: escreva | (L19 - C24 )
-| Token: ( | Lexema: ( | (L19 - C31 )
-| Token: numero | Lexema: 2 | (L19 - C32 )
-| Token: ) | Lexema: ) | (L19 - C33 )
-| Token: ; | Lexema: ; | (L19 - C34 )
-| Token: fimse | Lexema: fimse | (L20 - C20 )
-| Token: ; | Lexema: ; | (L20 - C25 )
-| Token: senao | Lexema: senao | (L21 - C16 )
-| Token: se | Lexema: se | (L22 - C20 )
-| Token: ( | Lexema: ( | (L22 - C22 )
-| Token: id | Lexema: a | (L22 - C23 )
-| Token: == | Lexema: == | (L22 - C25 )
-| Token: id | Lexema: c | (L22 - C28 )
-| Token: ) | Lexema: ) | (L22 - C29 )
-| Token: entao | Lexema: entao | (L22 - C31 )
-| Token: escreva | Lexema: escreva | (L23 - C24 )
-| Token: ( | Lexema: ( | (L23 - C31 )
-| Token: numero | Lexema: 2 | (L23 - C32 )
-| Token: ) | Lexema: ) | (L23 - C33 )
-| Token: ; | Lexema: ; | (L23 - C34 )
-| Token: senao | Lexema: senao | (L24 - C20 )
-| Token: escreva | Lexema: escreva | (L25 - C25 )
-| Token: ( | Lexema: ( | (L25 - C32 )
-| Token: numero | Lexema: 3 | (L25 - C33 )
-| Token: ) | Lexema: ) | (L25 - C34 )
-| Token: ; | Lexema: ; | (L25 - C35 )
-| Token: fimse | Lexema: fimse | (L26 - C20 )
-| Token: ; | Lexema: ; | (L26 - C25 )
-| Token: se | Lexema: se | (L27 - C20 )
-| Token: ( | Lexema: ( | (L27 - C22 )
-| Token: id | Lexema: b | (L27 - C23 )
-| Token: == | Lexema: == | (L27 - C25 )
-| Token: id | Lexema: c | (L27 - C28 )
-| Token: ) | Lexema: ) | (L27 - C29 )
-| Token: entao | Lexema: entao | (L27 - C31 )
-| Token: escreva | Lexema: escreva | (L28 - C24 )
-| Token: ( | Lexema: ( | (L28 - C31 )
-| Token: numero | Lexema: 2 | (L28 - C32 )
-| Token: ) | Lexema: ) | (L28 - C33 )
-| Token: ; | Lexema: ; | (L28 - C34 )
-| Token: senao | Lexema: senao | (L29 - C20 )
-| Token: escreva | Lexema: escreva | (L30 - C25 )
-| Token: ( | Lexema: ( | (L30 - C32 )
-| Token: numero | Lexema: 3 | (L30 - C33 )
-| Token: ) | Lexema: ) | (L30 - C34 )
-| Token: ; | Lexema: ; | (L30 - C35 )
-| Token: fimse | Lexema: fimse | (L31 - C20 )
-| Token: ; | Lexema: ; | (L31 - C25 )
-| Token: fimse | Lexema: fimse | (L33 - C16 )
-| Token: ; | Lexema: ; | (L33 - C21 )
-| Token: senao | Lexema: senao | (L35 - C12 )
-| Token: escreva | Lexema: escreva | (L36 - C16 )
-| Token: ( | Lexema: ( | (L36 - C23 )
-| Token: numero | Lexema: 99 | (L36 - C24 )
-| Token: ) | Lexema: ) | (L36 - C26 )
-| Token: ; | Lexema: ; | (L36 - C27 )
-| Token: fimse | Lexema: fimse | (L38 - C12 )
-| Token: ; | Lexema: ; | (L38 - C17 )
-| Token: senao | Lexema: senao | (L40 - C8 )
-| Token: escreva | Lexema: escreva | (L41 - C12 )
-| Token: ( | Lexema: ( | (L41 - C19 )
-| Token: numero | Lexema: 99 | (L41 - C20 )
-| Token: ) | Lexema: ) | (L41 - C22 )
-| Token: ; | Lexema: ; | (L41 - C23 )
-| Token: fimse | Lexema: fimse | (L42 - C8 )
-| Token: ; | Lexema: ; | (L42 - C13 )
-| Token: senao | Lexema: senao | (L43 - C4 )
-| Token: escreva | Lexema: escreva | (L44 - C8 )
-| Token: ( | Lexema: ( | (L44 - C15 )
-| Token: numero | Lexema: 99 | (L44 - C16 )
-| Token: ) | Lexema: ) | (L44 - C18 )
-| Token: ; | Lexema: ; | (L44 - C19 )
-| Token: fimse | Lexema: fimse | (L45 - C4 )
-| Token: ; | Lexema: ; | (L45 - C9 )
-| Token: fimprograma | Lexema: fimp | (L47 - C0 )
+| Token: id | Lexema: linhaatual | (L5 - C4 )
+| Token: ; | Lexema: ; | (L5 - C14 )
+| Token: id | Lexema: linhaatual | (L6 - C0 )
+| Token: = | Lexema: = | (L6 - C11 )
+| Token: numero | Lexema: 0 | (L6 - C13 )
+| Token: ; | Lexema: ; | (L6 - C14 )
+| Token: var | Lexema: var | (L8 - C0 )
+| Token: id | Lexema: coeficiente | (L8 - C4 )
+| Token: ; | Lexema: ; | (L8 - C15 )
+| Token: var | Lexema: var | (L10 - C0 )
+| Token: id | Lexema: posicaoatual | (L10 - C4 )
+| Token: ; | Lexema: ; | (L10 - C16 )
+| Token: id | Lexema: posicaoatual | (L11 - C0 )
+| Token: = | Lexema: = | (L11 - C13 )
+| Token: numero | Lexema: 0 | (L11 - C15 )
+| Token: ; | Lexema: ; | (L11 - C16 )
+| Token: var | Lexema: var | (L14 - C0 )
+| Token: id | Lexema: numerolinhas | (L14 - C4 )
+| Token: ; | Lexema: ; | (L14 - C16 )
+| Token: leia | Lexema: leia | (L15 - C0 )
+| Token: ( | Lexema: ( | (L15 - C4 )
+| Token: id | Lexema: numerolinhas | (L15 - C5 )
+| Token: ) | Lexema: ) | (L15 - C17 )
+| Token: ; | Lexema: ; | (L15 - C18 )
+| Token: laco | Lexema: laco | (L17 - C4 )
+| Token: ( | Lexema: ( | (L17 - C9 )
+| Token: id | Lexema: linhaatual | (L17 - C11 )
+| Token: < | Lexema: < | (L17 - C22 )
+| Token: id | Lexema: numerolinhas | (L17 - C24 )
+| Token: ) | Lexema: ) | (L17 - C37 )
+| Token: faca | Lexema: faca | (L17 - C39 )
+| Token: id | Lexema: coeficiente | (L18 - C8 )
+| Token: = | Lexema: = | (L18 - C20 )
+| Token: numero | Lexema: 1 | (L18 - C22 )
+| Token: ; | Lexema: ; | (L18 - C23 )
+| Token: laco | Lexema: laco | (L20 - C8 )
+| Token: ( | Lexema: ( | (L20 - C13 )
+| Token: id | Lexema: posicaoatual | (L20 - C15 )
+| Token: <= | Lexema: <= | (L20 - C28 )
+| Token: id | Lexema: linhaatual | (L20 - C31 )
+| Token: ) | Lexema: ) | (L20 - C42 )
+| Token: faca | Lexema: faca | (L20 - C44 )
+| Token: escreva | Lexema: escreva | (L21 - C12 )
+| Token: ( | Lexema: ( | (L21 - C19 )
+| Token: id | Lexema: coeficiente | (L21 - C20 )
+| Token: ) | Lexema: ) | (L21 - C31 )
+| Token: ; | Lexema: ; | (L21 - C32 )
+| Token: id | Lexema: coeficiente | (L22 - C12 )
+| Token: = | Lexema: = | (L22 - C24 )
+| Token: id | Lexema: coeficiente | (L22 - C26 )
+| Token: * | Lexema: * | (L22 - C38 )
+| Token: ( | Lexema: ( | (L22 - C40 )
+| Token: id | Lexema: linhaatual | (L22 - C41 )
+| Token: - | Lexema: - | (L22 - C52 )
+| Token: id | Lexema: posicaoatual | (L22 - C54 )
+| Token: ) | Lexema: ) | (L22 - C66 )
+| Token: / | Lexema: / | (L22 - C68 )
+| Token: ( | Lexema: ( | (L22 - C70 )
+| Token: id | Lexema: posicaoatual | (L22 - C71 )
+| Token: + | Lexema: + | (L22 - C84 )
+| Token: numero | Lexema: 1 | (L22 - C86 )
+| Token: ) | Lexema: ) | (L22 - C87 )
+| Token: ; | Lexema: ; | (L22 - C88 )
+| Token: fimlaco | Lexema: fimlaco | (L24 - C8 )
+| Token: ; | Lexema: ; | (L24 - C15 )
+| Token: id | Lexema: linhaatual | (L28 - C8 )
+| Token: = | Lexema: = | (L28 - C19 )
+| Token: id | Lexema: linhaatual | (L28 - C21 )
+| Token: + | Lexema: + | (L28 - C32 )
+| Token: numero | Lexema: 1 | (L28 - C34 )
+| Token: ; | Lexema: ; | (L28 - C35 )
+| Token: escreva | Lexema: escreva | (L30 - C8 )
+| Token: ( | Lexema: ( | (L30 - C15 )
+| Token: numero | Lexema: 0 | (L30 - C16 )
+| Token: ) | Lexema: ) | (L30 - C17 )
+| Token: ; | Lexema: ; | (L30 - C18 )
+| Token: fimlaco | Lexema: fimlaco | (L31 - C4 )
+| Token: ; | Lexema: ; | (L31 - C11 )
+| Token: fimprograma | Lexema: fimp | (L32 - C0 )
 
 
 Fim da listagem dos token
@@ -226,6 +160,90 @@ Empilhado: <declaracao>
 
 Desempilhado: <declaracao>
 
+Empilhado: <expressao>
+
+Empilhado: =
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: =
+
+Desempilhado: =
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: numero
+
+**************Dois Terminais*****************
+
+Desempilhado: numero
+
+Desempilhado: numero
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: ;
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
 Empilhado: id
 
 Empilhado: var
@@ -302,30 +320,12 @@ Empilhado: <declaracao>
 
 Desempilhado: <declaracao>
 
-Empilhado: )
+Empilhado: <expressao>
+
+Empilhado: =
 
 Empilhado: id
 
-Empilhado: (
-
-Empilhado: leia
-
-**************Dois Terminais*****************
-
-Desempilhado: leia
-
-Desempilhado: leia
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
 **************Dois Terminais*****************
 
 Desempilhado: id
@@ -336,9 +336,91 @@ Desempilhado: id
 
 **************Dois Terminais*****************
 
-Desempilhado: )
+Desempilhado: =
 
-Desempilhado: )
+Desempilhado: =
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: numero
+
+**************Dois Terminais*****************
+
+Desempilhado: numero
+
+Desempilhado: numero
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: ;
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: id
+
+Empilhado: var
+
+**************Dois Terminais*****************
+
+Desempilhado: var
+
+Desempilhado: var
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
 
 *********************************************
 
@@ -418,81 +500,21 @@ Empilhado: <declaracao>
 
 Desempilhado: <declaracao>
 
-Empilhado: )
-
-Empilhado: id
-
-Empilhado: (
-
-Empilhado: leia
-
-**************Dois Terminais*****************
-
-Desempilhado: leia
-
-Desempilhado: leia
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
+Empilhado: fimlaco
 
 Empilhado: <declaracao_recursiva>
 
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: fimse
-
-Empilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
+Empilhado: faca
 
 Empilhado: <expressao_logica>
 
-Empilhado: se
+Empilhado: laco
 
 **************Dois Terminais*****************
 
-Desempilhado: se
+Desempilhado: laco
 
-Desempilhado: se
+Desempilhado: laco
 
 *********************************************
 
@@ -503,6 +525,728 @@ Empilhado: )
 Empilhado: <expressao>
 
 Empilhado: <operador_logico>
+
+Empilhado: <expressao>
+
+Empilhado: (
+
+**************Dois Terminais*****************
+
+Desempilhado: (
+
+Desempilhado: (
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <operador_logico>
+
+Empilhado: <
+
+**************Dois Terminais*****************
+
+Desempilhado: <
+
+Desempilhado: <
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: )
+
+Desempilhado: )
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: faca
+
+Desempilhado: faca
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: ;
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <expressao>
+
+Empilhado: =
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: =
+
+Desempilhado: =
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: numero
+
+**************Dois Terminais*****************
+
+Desempilhado: numero
+
+Desempilhado: numero
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: ;
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: fimlaco
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: faca
+
+Empilhado: <expressao_logica>
+
+Empilhado: laco
+
+**************Dois Terminais*****************
+
+Desempilhado: laco
+
+Desempilhado: laco
+
+*********************************************
+
+Desempilhado: <expressao_logica>
+
+Empilhado: )
+
+Empilhado: <expressao>
+
+Empilhado: <operador_logico>
+
+Empilhado: <expressao>
+
+Empilhado: (
+
+**************Dois Terminais*****************
+
+Desempilhado: (
+
+Desempilhado: (
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <operador_logico>
+
+Empilhado: <=
+
+**************Dois Terminais*****************
+
+Desempilhado: <=
+
+Desempilhado: <=
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: )
+
+Desempilhado: )
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: faca
+
+Desempilhado: faca
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: ;
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <expressao>
+
+Empilhado: escreva
+
+**************Dois Terminais*****************
+
+Desempilhado: escreva
+
+Desempilhado: escreva
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: )
+
+Empilhado: <expressao>
+
+Empilhado: (
+
+**************Dois Terminais*****************
+
+Desempilhado: (
+
+Desempilhado: (
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: )
+
+Desempilhado: )
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: <declaracao_recursiva>
+
+Empilhado: ;
+
+Empilhado: <declaracao>
+
+Desempilhado: <declaracao>
+
+Empilhado: <expressao>
+
+Empilhado: =
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: =
+
+Desempilhado: =
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Empilhado: <multi_div>
+
+Desempilhado: <multi_div>
+
+Empilhado: *
+
+**************Dois Terminais*****************
+
+Desempilhado: *
+
+Desempilhado: *
+
+*********************************************
+
+Desempilhado: <fator>
+
+Empilhado: )
+
+Empilhado: <expressao>
+
+Empilhado: (
+
+**************Dois Terminais*****************
+
+Desempilhado: (
+
+Desempilhado: (
+
+*********************************************
+
+Desempilhado: <expressao>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: <proximo_termo>
+
+Empilhado: <termo>
+
+Empilhado: <mais_menos>
+
+Desempilhado: <mais_menos>
+
+Empilhado: -
+
+**************Dois Terminais*****************
+
+Desempilhado: -
+
+Desempilhado: -
+
+*********************************************
+
+Desempilhado: <termo>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Desempilhado: <fator>
+
+Empilhado: id
+
+**************Dois Terminais*****************
+
+Desempilhado: id
+
+Desempilhado: id
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: )
+
+Desempilhado: )
+
+*********************************************
+
+Desempilhado: <proximo_fator>
+
+Empilhado: <proximo_fator>
+
+Empilhado: <fator>
+
+Empilhado: <multi_div>
+
+Desempilhado: <multi_div>
+
+Empilhado: /
+
+**************Dois Terminais*****************
+
+Desempilhado: /
+
+Desempilhado: /
+
+*********************************************
+
+Desempilhado: <fator>
+
+Empilhado: )
 
 Empilhado: <expressao>
 
@@ -578,69 +1322,13 @@ Empilhado: <fator>
 
 Desempilhado: <fator>
 
-Empilhado: id
+Empilhado: numero
 
 **************Dois Terminais*****************
 
-Desempilhado: id
+Desempilhado: numero
 
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: >
-
-**************Dois Terminais*****************
-
-Desempilhado: >
-
-Desempilhado: >
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
+Desempilhado: numero
 
 *********************************************
 
@@ -672,11 +1360,57 @@ Desempilhado: )
 
 *********************************************
 
+Desempilhado: <proximo_fator>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+Desempilhado: <proximo_termo>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
 **************Dois Terminais*****************
 
-Desempilhado: entao
+Desempilhado: ;
 
-Desempilhado: entao
+Desempilhado: ;
+
+*********************************************
+
+Desempilhado: <declaracao_recursiva>
+
+Empilhado: ?
+
+********  Vazio  *****************************
+
+Desempilhado: ?
+
+**********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: fimlaco
+
+Desempilhado: fimlaco
+
+*********************************************
+
+**************Dois Terminais*****************
+
+Desempilhado: ;
+
+Desempilhado: ;
 
 *********************************************
 
@@ -690,43 +1424,25 @@ Empilhado: <declaracao>
 
 Desempilhado: <declaracao>
 
-Empilhado: fimse
+Empilhado: <expressao>
 
-Empilhado: <senao>
+Empilhado: =
 
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
-
-Empilhado: <expressao_logica>
-
-Empilhado: se
+Empilhado: id
 
 **************Dois Terminais*****************
 
-Desempilhado: se
+Desempilhado: id
 
-Desempilhado: se
+Desempilhado: id
 
 *********************************************
 
-Desempilhado: <expressao_logica>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: <operador_logico>
-
-Empilhado: <expressao>
-
-Empilhado: (
-
 **************Dois Terminais*****************
 
-Desempilhado: (
+Desempilhado: =
 
-Desempilhado: (
+Desempilhado: =
 
 *********************************************
 
@@ -792,718 +1508,6 @@ Empilhado: <fator>
 
 Desempilhado: <fator>
 
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: >
-
-**************Dois Terminais*****************
-
-Desempilhado: >
-
-Desempilhado: >
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: entao
-
-Desempilhado: entao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: fimse
-
-Empilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
-
-Empilhado: <expressao_logica>
-
-Empilhado: se
-
-**************Dois Terminais*****************
-
-Desempilhado: se
-
-Desempilhado: se
-
-*********************************************
-
-Desempilhado: <expressao_logica>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: <operador_logico>
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Empilhado: <mais_menos>
-
-Desempilhado: <mais_menos>
-
-Empilhado: +
-
-**************Dois Terminais*****************
-
-Desempilhado: +
-
-Desempilhado: +
-
-*********************************************
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: >
-
-**************Dois Terminais*****************
-
-Desempilhado: >
-
-Desempilhado: >
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: entao
-
-Desempilhado: entao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: fimse
-
-Empilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
-
-Empilhado: <expressao_logica>
-
-Empilhado: se
-
-**************Dois Terminais*****************
-
-Desempilhado: se
-
-Desempilhado: se
-
-*********************************************
-
-Desempilhado: <expressao_logica>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: <operador_logico>
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: ==
-
-**************Dois Terminais*****************
-
-Desempilhado: ==
-
-Desempilhado: ==
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: entao
-
-Desempilhado: entao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: fimse
-
-Empilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
-
-Empilhado: <expressao_logica>
-
-Empilhado: se
-
-**************Dois Terminais*****************
-
-Desempilhado: se
-
-Desempilhado: se
-
-*********************************************
-
-Desempilhado: <expressao_logica>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: <operador_logico>
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: ==
-
-**************Dois Terminais*****************
-
-Desempilhado: ==
-
-Desempilhado: ==
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: entao
-
-Desempilhado: entao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
 Empilhado: numero
 
 **************Dois Terminais*****************
@@ -1536,61 +1540,9 @@ Desempilhado: ?
 
 **************Dois Terminais*****************
 
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
 Desempilhado: ;
 
 Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
 
 *********************************************
 
@@ -1736,1551 +1688,9 @@ Desempilhado: ?
 
 **************Dois Terminais*****************
 
-Desempilhado: fimse
+Desempilhado: fimlaco
 
-Desempilhado: fimse
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: fimse
-
-Empilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
-
-Empilhado: <expressao_logica>
-
-Empilhado: se
-
-**************Dois Terminais*****************
-
-Desempilhado: se
-
-Desempilhado: se
-
-*********************************************
-
-Desempilhado: <expressao_logica>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: <operador_logico>
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: ==
-
-**************Dois Terminais*****************
-
-Desempilhado: ==
-
-Desempilhado: ==
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: entao
-
-Desempilhado: entao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: fimse
-
-Desempilhado: fimse
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: fimse
-
-Empilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: entao
-
-Empilhado: <expressao_logica>
-
-Empilhado: se
-
-**************Dois Terminais*****************
-
-Desempilhado: se
-
-Desempilhado: se
-
-*********************************************
-
-Desempilhado: <expressao_logica>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: <operador_logico>
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <operador_logico>
-
-Empilhado: ==
-
-**************Dois Terminais*****************
-
-Desempilhado: ==
-
-Desempilhado: ==
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: id
-
-**************Dois Terminais*****************
-
-Desempilhado: id
-
-Desempilhado: id
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: entao
-
-Desempilhado: entao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: fimse
-
-Desempilhado: fimse
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: fimse
-
-Desempilhado: fimse
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: fimse
-
-Desempilhado: fimse
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: fimse
-
-Desempilhado: fimse
-
-*********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <senao>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: senao
-
-**************Dois Terminais*****************
-
-Desempilhado: senao
-
-Desempilhado: senao
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: <declaracao_recursiva>
-
-Empilhado: ;
-
-Empilhado: <declaracao>
-
-Desempilhado: <declaracao>
-
-Empilhado: <expressao>
-
-Empilhado: escreva
-
-**************Dois Terminais*****************
-
-Desempilhado: escreva
-
-Desempilhado: escreva
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: )
-
-Empilhado: <expressao>
-
-Empilhado: (
-
-**************Dois Terminais*****************
-
-Desempilhado: (
-
-Desempilhado: (
-
-*********************************************
-
-Desempilhado: <expressao>
-
-Empilhado: <proximo_termo>
-
-Empilhado: <termo>
-
-Desempilhado: <termo>
-
-Empilhado: <proximo_fator>
-
-Empilhado: <fator>
-
-Desempilhado: <fator>
-
-Empilhado: numero
-
-**************Dois Terminais*****************
-
-Desempilhado: numero
-
-Desempilhado: numero
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: )
-
-Desempilhado: )
-
-*********************************************
-
-Desempilhado: <proximo_fator>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-Desempilhado: <proximo_termo>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: ;
-
-Desempilhado: ;
-
-*********************************************
-
-Desempilhado: <declaracao_recursiva>
-
-Empilhado: ?
-
-********  Vazio  *****************************
-
-Desempilhado: ?
-
-**********************************************
-
-**************Dois Terminais*****************
-
-Desempilhado: fimse
-
-Desempilhado: fimse
+Desempilhado: fimlaco
 
 *********************************************
 
@@ -3321,12 +1731,16 @@ Fim Log da analise sintatica
 *********************************************************************
 *********************************************************************
 Inicio Log da analise semantica
-A variavel 'a' foi declarada
-A variavel 'b' foi declarada
-A variavel 'c' foi declarada
-A variavel 'a' e um valor a ser lido
-A variavel 'b' e um valor a ser lido
-A variavel 'c' e um valor a ser lido
+A variavel 'linhaatual' foi declarada
+A variavel 'linhaatual' recebeu o valor: '0'
+A variavel 'coeficiente' foi declarada
+A variavel 'posicaoatual' foi declarada
+A variavel 'posicaoatual' recebeu o valor: '0'
+A variavel 'numerolinhas' foi declarada
+A variavel 'numerolinhas' e um valor a ser lido
+A variavel 'coeficiente' recebeu o valor: '1'
+A variavel 'coeficiente' recebeu o valor: 'coeficiente*(0-0)/(0+1)'
+A variavel 'linhaatual' recebeu o valor: '0+1'
 
 
 Fim Log da analise semantica
@@ -3336,42 +1750,22 @@ Fim Log da analise semantica
 
 Inicio Codigo Intermediario
 Inicio do codigo intermediario
-_Var a
-_Var b
-_Var c
-leia a
-leia b
-leia c
-se  ( a + b > c ) entao
-se  ( a + c > b ) entao
-se  ( b + c > a ) entao
-se  ( a == b ) entao
-se  ( a == c ) entao
-escreva 1
-senao 
-escreva 2
-fimse 
-senao 
-se  ( a == c ) entao
-escreva 2
-senao 
-escreva 3
-fimse 
-se  ( b == c ) entao
-escreva 2
-senao 
-escreva 3
-fimse 
-fimse 
-senao 
-escreva 99
-fimse 
-senao 
-escreva 99
-fimse 
-senao 
-escreva 99
-fimse 
+_Var posicaoatual
+_Var linhaatual
+_Var coeficiente
+_Var numerolinhas
+linhaatual = 0
+posicaoatual = 0
+leia numerolinhas
+enquanto (linhaatual<numerolinhas) faca
+coeficiente = 1
+enquanto (posicaoatual<=linhaatual) faca
+escreva coeficiente
+coeficiente = coeficiente linhaatual posicaoatual - * posicaoatual 1 + /
+fim_enquanto 
+linhaatual = linhaatual 1 +
+escreva 0
+fim_enquanto 
 
 
 Fim Codigo Intermediario
@@ -3380,42 +1774,22 @@ Fim Codigo Intermediario
 
 
 Inicio Log do Codigo Intermediario
-Declaracao da variavel a
-Declaracao da variavel b
-Declaracao da variavel c
-Comando de leitura da variavel  a
-Comando de leitura da variavel  b
-Comando de leitura da variavel  c
-Reconhecido comando condicional (se entao) 
-Reconhecido comando condicional (se entao) 
-Reconhecido comando condicional (se entao) 
-Reconhecido comando condicional (se entao) 
-Reconhecido comando condicional (se entao) 
+Declaracao da variavel posicaoatual
+Declaracao da variavel linhaatual
+Declaracao da variavel coeficiente
+Declaracao da variavel numerolinhas
+Expressao atribuida para variavel linhaatual
+Expressao atribuida para variavel posicaoatual
+Comando de leitura da variavel  numerolinhas
+Reconhecido comando repecitao (enquanto)
+Expressao atribuida para variavel coeficiente
+Reconhecido comando repecitao (enquanto)
 Comando para escrever em tela
-Reconhecido complemento do comando condiconal (senao) 
+Expressao atribuida para variavel coeficiente
+Reconhecido comando fim_enquanto
+Expressao atribuida para variavel linhaatual
 Comando para escrever em tela
-Reconhecido termino do comando condiconal (fimse) 
-Reconhecido complemento do comando condiconal (senao) 
-Reconhecido comando condicional (se entao) 
-Comando para escrever em tela
-Reconhecido complemento do comando condiconal (senao) 
-Comando para escrever em tela
-Reconhecido termino do comando condiconal (fimse) 
-Reconhecido comando condicional (se entao) 
-Comando para escrever em tela
-Reconhecido complemento do comando condiconal (senao) 
-Comando para escrever em tela
-Reconhecido termino do comando condiconal (fimse) 
-Reconhecido termino do comando condiconal (fimse) 
-Reconhecido complemento do comando condiconal (senao) 
-Comando para escrever em tela
-Reconhecido termino do comando condiconal (fimse) 
-Reconhecido complemento do comando condiconal (senao) 
-Comando para escrever em tela
-Reconhecido termino do comando condiconal (fimse) 
-Reconhecido complemento do comando condiconal (senao) 
-Comando para escrever em tela
-Reconhecido termino do comando condiconal (fimse) 
+Reconhecido comando fim_enquanto
 
 
 Fim Log do Codigo Intermediario

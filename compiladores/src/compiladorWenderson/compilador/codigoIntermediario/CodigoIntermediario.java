@@ -62,13 +62,26 @@ public class CodigoIntermediario {
 				codigoIntermediario.add(comando + infix_posfix.InFixToPosFix(expressao));
 				registarLog.add("Comando para escrever em tela");
 			}else if(listaToken.get(i).getToken().equals("laco")) {
-				i = i + 1 ;
-				comando = "enquanto ";
+				comando = "enquanto (";
+				i = i + 2;
+				String expressao = "";
+				String expressao2 = "" ;
 				
-				while(!listaToken.get(i).getToken().equals(";") && !listaToken.get(i+1).getToken().equals("faca")) {
-					comando += " " +listaToken.get(i).getLexema();
-					++i;
+				while(!listaToken.get(i).getToken().equals("faca")) {
+					if(listaToken.get(i).getToken().equals("<=") || listaToken.get(i).getToken().equals("<") ||
+					 		listaToken.get(i).getToken().equals(">=") || listaToken.get(i).getToken().equals(">") || 
+					 		listaToken.get(i).getToken().equals("==") ) {
+					 		expressao = infix_posfix.InFixToPosFix(expressao2) + listaToken.get(i).getLexema()  ;
+					 		expressao2 = expressao;
+					 		
+					 	}else {
+					 		
+					 		expressao2 += "" +listaToken.get(i).getLexema();
+					 	}
+
+						++i;
 				}
+				comando = comando  + expressao2 + " faca";
 				codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando repecitao (enquanto)");
 			}else if(listaToken.get(i).getToken().equals("fimlaco")) {
@@ -77,13 +90,25 @@ public class CodigoIntermediario {
 				codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando fim_enquanto");
 			}else if(listaToken.get(i).getToken().equals("se")) {
-				 comando = "se ";
-				 i = i + 1;
+				 comando = "se (";
+				 i = i + 2;
+				 String expressao = "";
+				 String expressao2 = "" ;
 				 while(!listaToken.get(i).getToken().equals("entao")) {
-						comando += " " +listaToken.get(i).getLexema();
+					 	if(listaToken.get(i).getToken().equals("<=") || listaToken.get(i).getToken().equals("<") ||
+					 		listaToken.get(i).getToken().equals(">=") || listaToken.get(i).getToken().equals(">") || 
+					 		listaToken.get(i).getToken().equals("==") ) {
+					 		expressao = infix_posfix.InFixToPosFix(expressao2) + listaToken.get(i).getLexema()  ;
+					 		expressao2 = expressao;
+					 		
+					 	}else {
+					 		
+					 		expressao2 += "" +listaToken.get(i).getLexema();
+					 	}
+
 						++i;
 				 }
-				 comando = comando  + " entao";
+				 comando = comando  + expressao2 + " entao";
 				 codigoIntermediario.add(comando);
 				 registarLog.add("Reconhecido comando condicional (se entao) ");
 			}else if(listaToken.get(i).getToken().equals("senao")) {
