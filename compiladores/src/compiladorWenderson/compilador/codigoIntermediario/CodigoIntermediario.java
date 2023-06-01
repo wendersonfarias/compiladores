@@ -62,7 +62,7 @@ public class CodigoIntermediario {
 				codigoIntermediario.add(comando + infix_posfix.InFixToPosFix(expressao));
 				registarLog.add("Comando para escrever em tela");
 			}else if(listaToken.get(i).getToken().equals("laco")) {
-				comando = "enquanto (";
+				comando = "enquanto ";
 				i = i + 2;
 				String expressao = "";
 				String expressao2 = "" ;
@@ -81,7 +81,8 @@ public class CodigoIntermediario {
 
 						++i;
 				}
-				comando = comando  + expressao2 + " faca";
+				String[] expressao3 = expressao2.split(")");
+				comando = comando  + expressao3[0] + "";
 				codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando repecitao (enquanto)");
 			}else if(listaToken.get(i).getToken().equals("fimlaco")) {
@@ -90,7 +91,7 @@ public class CodigoIntermediario {
 				codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando fim_enquanto");
 			}else if(listaToken.get(i).getToken().equals("se")) {
-				 comando = "se (";
+				 comando = "se ";
 				 i = i + 2;
 				 String expressao = "";
 				 String expressao2 = "" ;
@@ -108,7 +109,8 @@ public class CodigoIntermediario {
 
 						++i;
 				 }
-				 comando = comando  + expressao2 + " entao";
+				 String[] expressao3 = expressao2.split(")");
+				 comando = comando  + expressao3[0] ;
 				 codigoIntermediario.add(comando);
 				 registarLog.add("Reconhecido comando condicional (se entao) ");
 			}else if(listaToken.get(i).getToken().equals("senao")) {

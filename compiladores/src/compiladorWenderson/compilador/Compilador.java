@@ -10,6 +10,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Map;
 
+import compiladorWenderson.compilador.codigoFinal.CodigoFinal;
 import compiladorWenderson.compilador.codigoIntermediario.CodigoIntermediario;
 import compiladorWenderson.compilador.lexico.AnalisadorLexico;
 import compiladorWenderson.compilador.lexico.ListaTokens;
@@ -24,6 +25,8 @@ public class Compilador {
 		Boolean listarLogSintatico = false;
 		Boolean listarLogSemantico = false;
 		Boolean listarLogCodigoIntermediario = false;
+		Boolean listarLogCodigoFinal = false;
+		
 		for (String arg : args) {
 			if(arg.equals("-tudo")) {
 				listarLogSintatico= true;
@@ -41,6 +44,9 @@ public class Compilador {
             }
             else if(arg.equals("-ci")) {
             	listarLogCodigoIntermediario = true;
+            }
+            else if(arg.equals("-cf")) {
+            	listarLogCodigoFinal = true;
             }
             
             if(arg.contains("txt")) {
@@ -65,8 +71,12 @@ public class Compilador {
 
 		ArrayList<String> logSintatico = new ArrayList<String>();
 		ArrayList<String> logSemantico= new ArrayList<String>();
+		
 		ArrayList<String> logCodigoIntermediario= new ArrayList<String>();
 		ArrayList<String> codigoIntermediario = new ArrayList<String>();
+		
+		ArrayList<String> logCodigoFinal= new ArrayList<String>();
+		ArrayList<String> codigoFinal = new ArrayList<String>();
 		
 		Boolean erroSintatico = false;
 		Boolean erroSemantico = false;
@@ -116,11 +126,15 @@ public class Compilador {
 					codigoIntermediario = gerarCodigoIntermediario.gerarCodigoIntermediario();
 					logCodigoIntermediario = gerarCodigoIntermediario.retornaLogIntermediario();
 					
+					CodigoFinal gerarCodigoFinal = new CodigoFinal(codigoIntermediario);
+					codigoFinal = gerarCodigoFinal.gerarCodigoFinal();
+					logCodigoFinal = gerarCodigoFinal.retornaLogFinal();
+					
+					
 					if(listarLogCodigoIntermediario) {
 						logEscreverConsole.add("*********************************************************************");
 						logEscreverConsole.add("*********************************************************************");
 						logEscreverConsole.add("\n");
-						logEscreverConsole.add("Inicio Codigo Intermediario");
 						logEscreverConsole.addAll(codigoIntermediario);
 						logEscreverConsole.add("\n");
 						logEscreverConsole.add("Fim Codigo Intermediario");
@@ -131,6 +145,24 @@ public class Compilador {
 						logEscreverConsole.addAll(logCodigoIntermediario);
 						logEscreverConsole.add("\n");
 						logEscreverConsole.add("Fim Log do Codigo Intermediario");
+						
+					}
+					
+					if(listarLogCodigoFinal) {
+						logEscreverConsole.add("*********************************************************************");
+						logEscreverConsole.add("*********************************************************************");
+						logEscreverConsole.add("Inicio Codigo Final MEPA");
+						logEscreverConsole.add("\n");
+						logEscreverConsole.addAll(codigoFinal);
+						logEscreverConsole.add("\n");
+						logEscreverConsole.add("Fim Codigo Final MEPA");
+						logEscreverConsole.add("*********************************************************************");
+						logEscreverConsole.add("*********************************************************************");
+						logEscreverConsole.add("\n");
+						logEscreverConsole.add("Inicio Log Codigo Final MEPA");
+						logEscreverConsole.addAll(logCodigoFinal);
+						logEscreverConsole.add("\n");
+						logEscreverConsole.add("Inicio Log Codigo Final MEPA");
 						
 					}
 				}

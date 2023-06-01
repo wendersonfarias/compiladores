@@ -1721,7 +1721,7 @@ Desempilhado: fimprograma
 *********************************************
 ***************************************************
 *     Analise Sintatica feita com sucesso!        *
-*     2023-05-30                                  *
+*     2023-05-31                                  *
 ***************************************************
 
 
@@ -1748,7 +1748,6 @@ Fim Log da analise semantica
 *********************************************************************
 
 
-Inicio Codigo Intermediario
 Inicio do codigo intermediario
 _Var posicaoatual
 _Var linhaatual
