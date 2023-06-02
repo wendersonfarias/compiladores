@@ -21,12 +21,20 @@ public class CodigoIntermediario {
 	}
 	
 	public ArrayList<String>  gerarCodigoIntermediario(){
-		codigoIntermediario.add("Inicio do codigo intermediario");
-	  Infix_posfix2 infix_posfix = new Infix_posfix2();
-		for(String variavel : tabelaSimbolos.keySet()) {
+		
+	   ArrayList<String> zeraVariaveis = new ArrayList<String>();
+	   Infix_posfix2 infix_posfix = new Infix_posfix2();
+	   for(String variavel : tabelaSimbolos.keySet()) {
 			codigoIntermediario.add("_Var "+ variavel);
 			registarLog.add("Declaracao da variavel "+ variavel);
+			zeraVariaveis.add(variavel + " = 0"  );
+			
 		}
+	   
+		for (String variavel : zeraVariaveis) {
+			codigoIntermediario.add(variavel);
+		}
+		
 		Integer i = 0;
 		
 		//converte as producoes  
@@ -71,7 +79,7 @@ public class CodigoIntermediario {
 					if(listaToken.get(i).getToken().equals("<=") || listaToken.get(i).getToken().equals("<") ||
 					 		listaToken.get(i).getToken().equals(">=") || listaToken.get(i).getToken().equals(">") || 
 					 		listaToken.get(i).getToken().equals("==") ) {
-					 		expressao = infix_posfix.InFixToPosFix(expressao2) + listaToken.get(i).getLexema()  ;
+					 		expressao = infix_posfix.InFixToPosFix(expressao2) + " " + listaToken.get(i).getLexema() + " " ;
 					 		expressao2 = expressao;
 					 		
 					 	}else {
@@ -81,15 +89,15 @@ public class CodigoIntermediario {
 
 						++i;
 				}
-				String[] expressao3 = expressao2.split(")");
+				String[] expressao3 = expressao2.split("\\)");
 				comando = comando  + expressao3[0] + "";
 				codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando repecitao (enquanto)");
 			}else if(listaToken.get(i).getToken().equals("fimlaco")) {
-				comando = "fim_enquanto ";
+				comando = "fimenquanto ";
 				i = i+ 1 ;
 				codigoIntermediario.add(comando);
-				registarLog.add("Reconhecido comando fim_enquanto");
+				registarLog.add("Reconhecido comando fimenquanto");
 			}else if(listaToken.get(i).getToken().equals("se")) {
 				 comando = "se ";
 				 i = i + 2;
@@ -99,7 +107,7 @@ public class CodigoIntermediario {
 					 	if(listaToken.get(i).getToken().equals("<=") || listaToken.get(i).getToken().equals("<") ||
 					 		listaToken.get(i).getToken().equals(">=") || listaToken.get(i).getToken().equals(">") || 
 					 		listaToken.get(i).getToken().equals("==") ) {
-					 		expressao = infix_posfix.InFixToPosFix(expressao2) + listaToken.get(i).getLexema()  ;
+					 		expressao = infix_posfix.InFixToPosFix(expressao2) + " " + listaToken.get(i).getLexema() + " "  ;
 					 		expressao2 = expressao;
 					 		
 					 	}else {
@@ -109,7 +117,7 @@ public class CodigoIntermediario {
 
 						++i;
 				 }
-				 String[] expressao3 = expressao2.split(")");
+				 String[] expressao3 = expressao2.split("\\)");
 				 comando = comando  + expressao3[0] ;
 				 codigoIntermediario.add(comando);
 				 registarLog.add("Reconhecido comando condicional (se entao) ");

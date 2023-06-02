@@ -1,0 +1,84 @@
+      MAIN       inicioprograma
+      ALOC 3      aloca memoria para 3 variaveis
+      LDCT 0      carrega o valor da constante 0
+      STVL 0,0      guarde o valor da expressao no endereco memoria correspondente a
+      LDCT 0      carrega o valor da constante 0
+      STVL 0,1      guarde o valor da expressao no endereco memoria correspondente b
+      LDCT 0      carrega o valor da constante 0
+      STVL 0,2      guarde o valor da expressao no endereco memoria correspondente c
+      READ       leia
+      STVL 0,0      carregue valor no endereco de memoria 0,0
+      READ       leia
+      STVL 0,1      carregue valor no endereco de memoria 0,1
+      READ       leia
+      STVL 0,2      carregue valor no endereco de memoria 0,2
+      LDVL 0,0      carrega o valor da variavel a
+      LDVL 0,1      carrega o valor da variavel b
+      ADDD      soma
+      LDVL 0,2      carrega o valor da variavel c
+      GRTR      compara maior
+JMPF L1      pula se falso
+      LDVL 0,0      carrega o valor da variavel a
+      LDVL 0,2      carrega o valor da variavel c
+      ADDD      soma
+      LDVL 0,1      carrega o valor da variavel b
+      GRTR      compara maior
+JMPF L2      pula se falso
+      LDVL 0,1      carrega o valor da variavel b
+      LDVL 0,2      carrega o valor da variavel c
+      ADDD      soma
+      LDVL 0,0      carrega o valor da variavel a
+      GRTR      compara maior
+JMPF L3      pula se falso
+      LDVL 0,0      carrega o valor da variavel a
+      LDVL 0,1      carrega o valor da variavel b
+      EQUA       compara igual
+JMPF L4      pula se falso
+      LDVL 0,0      carrega o valor da variavel a
+      LDVL 0,2      carrega o valor da variavel c
+      EQUA       compara igual
+JMPF L5      pula se falso
+      LDCT 1      carrega o valor da constante 1
+      PRNT escreva
+L5: NOOP      fimse
+JUMP L6      pula para o fim do senao
+L4: NOOP        senao
+      LDVL 0,0      carrega o valor da variavel a
+      LDVL 0,2      carrega o valor da variavel c
+      EQUA       compara igual
+JMPF L7      pula se falso
+      LDCT 2      carrega o valor da constante 2
+      PRNT escreva
+JUMP L8      pula para o fim do senao
+L7: NOOP        senao
+      LDVL 0,1      carrega o valor da variavel b
+      LDVL 0,2      carrega o valor da variavel c
+      EQUA       compara igual
+JMPF L9      pula se falso
+      LDCT 2      carrega o valor da constante 2
+      PRNT escreva
+JUMP L10      pula para o fim do senao
+L9: NOOP        senao
+      LDCT 3      carrega o valor da constante 3
+      PRNT escreva
+L10: NOOP      fimse
+L8: NOOP      fimse
+L6: NOOP      fimse
+JUMP L11      pula para o fim do senao
+L3: NOOP        senao
+      LDCT 99      carrega o valor da constante 99
+      PRNT escreva
+L11: NOOP      fimse
+JUMP L12      pula para o fim do senao
+L2: NOOP        senao
+      LDCT 99      carrega o valor da constante 99
+      PRNT escreva
+L12: NOOP      fimse
+JUMP L13      pula para o fim do senao
+L1: NOOP        senao
+      LDCT 99      carrega o valor da constante 99
+      PRNT escreva
+L13: NOOP      fimse
+      DLOC 3      Liberar memoria
+      STOP
+      END

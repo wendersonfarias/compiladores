@@ -33,6 +33,7 @@ public class Compilador {
 				listarLogTokens = true;
 				listarLogSemantico= true;
 				listarLogCodigoIntermediario = true;
+				listarLogCodigoFinal = true;
 			}
 			else if (arg.equals("-lt")) {
             	listarLogTokens = true;
@@ -134,6 +135,7 @@ public class Compilador {
 					if(listarLogCodigoIntermediario) {
 						logEscreverConsole.add("*********************************************************************");
 						logEscreverConsole.add("*********************************************************************");
+						logEscreverConsole.add("Inicio Codigo Intermediario");
 						logEscreverConsole.add("\n");
 						logEscreverConsole.addAll(codigoIntermediario);
 						logEscreverConsole.add("\n");
@@ -142,6 +144,7 @@ public class Compilador {
 						logEscreverConsole.add("*********************************************************************");
 						logEscreverConsole.add("\n");
 						logEscreverConsole.add("Inicio Log do Codigo Intermediario");
+						logEscreverConsole.add("\n");
 						logEscreverConsole.addAll(logCodigoIntermediario);
 						logEscreverConsole.add("\n");
 						logEscreverConsole.add("Fim Log do Codigo Intermediario");
@@ -149,6 +152,8 @@ public class Compilador {
 					}
 					
 					if(listarLogCodigoFinal) {
+						
+						
 						logEscreverConsole.add("*********************************************************************");
 						logEscreverConsole.add("*********************************************************************");
 						logEscreverConsole.add("Inicio Codigo Final MEPA");
@@ -189,6 +194,18 @@ public class Compilador {
 		}
 		
 		bw.close();
+		
+		OutputStream fos1 = new FileOutputStream("saida_codigo_final.txt");   
+		Writer osw1 = new OutputStreamWriter(fos1);
+		BufferedWriter bw1 = new BufferedWriter(osw1);
+		
+		for (int i = 0; i < codigoFinal.size(); i++) {
+			bw1.write(codigoFinal.get(i));
+			bw1.newLine();
+			bw1.flush();
+		}
+		
+		bw1.close();
 		
 	}
 
