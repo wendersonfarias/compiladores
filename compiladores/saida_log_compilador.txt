@@ -3230,76 +3230,76 @@ Fim Codigo Final MEPA
 
 Inicio Log Codigo Final MEPA
 Alocando memoria para 3      variaveis
-Geracao do codigo de comando Atribuicao: [Ljava.lang.String;@45c8e616
+Geracao do codigo de comando Atribuicao: a = 0
 Geracao de codigo de expressao 
-Geracao do codigo de comando Atribuicao: [Ljava.lang.String;@6debcae2
+Geracao do codigo de comando Atribuicao: b = 0
 Geracao de codigo de expressao 
-Geracao do codigo de comando Atribuicao: [Ljava.lang.String;@5ba23b66
+Geracao do codigo de comando Atribuicao: c = 0
 Geracao de codigo de expressao 
-Geracao comando READ: [Ljava.lang.String;@2ff4f00f
-Geracao comando READ: [Ljava.lang.String;@c818063
-Geracao comando READ: [Ljava.lang.String;@3f0ee7cb
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@75bd9247
+Geracao comando READ: leia a
+Geracao comando READ: leia b
+Geracao comando READ: leia c
+Geracao do codigo de comando condicional SE: se a b + > c
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
 Geracao de codigo de expressao 
 Geracao de codigo de expressao 
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@7d417077
+Geracao do codigo de comando condicional SE: se a c + > b
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
 Geracao de codigo de expressao 
 Geracao de codigo de expressao 
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@7dc36524
+Geracao do codigo de comando condicional SE: se b c + > a
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
 Geracao de codigo de expressao 
 Geracao de codigo de expressao 
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@35bbe5e8
+Geracao do codigo de comando condicional SE: se a == b
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
 Geracao de codigo de expressao 
 Geracao de codigo de expressao 
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@2c8d66b2
+Geracao do codigo de comando condicional SE: se a == c
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
 Geracao de codigo de expressao 
 Geracao de codigo de expressao 
-Geracao comando WRITE: [Ljava.lang.String;@5a39699c
+Geracao comando WRITE: escreva 1
 Geracao de codigo de expressao 
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@3cb5cdba
-Geracao do codigo de comando SENAO: [Ljava.lang.String;@56cbfb61
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
+Geracao do codigo de comando SENAO: senao 
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@1134affc
-Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao de codigo de expressao 
-Geracao de codigo de expressao 
-Geracao comando WRITE: [Ljava.lang.String;@d041cf
-Geracao de codigo de expressao 
-Geracao do codigo de comando SENAO: [Ljava.lang.String;@129a8472
-Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao do codigo de comando condicional SE: [Ljava.lang.String;@1b0375b3
+Geracao do codigo de comando condicional SE: se a == c
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
 Geracao de codigo de expressao 
 Geracao de codigo de expressao 
-Geracao comando WRITE: [Ljava.lang.String;@2f7c7260
+Geracao comando WRITE: escreva 2
 Geracao de codigo de expressao 
-Geracao do codigo de comando SENAO: [Ljava.lang.String;@2d209079
+Geracao do codigo de comando SENAO: senao 
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao comando WRITE: [Ljava.lang.String;@6bdf28bb
-Geracao de codigo de expressao 
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@6b71769e
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@2752f6e2
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@e580929
-Geracao do codigo de comando SENAO: [Ljava.lang.String;@1cd072a9
+Geracao do codigo de comando condicional SE: se b == c
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao comando WRITE: [Ljava.lang.String;@7c75222b
 Geracao de codigo de expressao 
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@4c203ea1
-Geracao do codigo de comando SENAO: [Ljava.lang.String;@27f674d
+Geracao de codigo de expressao 
+Geracao comando WRITE: escreva 2
+Geracao de codigo de expressao 
+Geracao do codigo de comando SENAO: senao 
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao comando WRITE: [Ljava.lang.String;@1d251891
+Geracao comando WRITE: escreva 3
 Geracao de codigo de expressao 
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@48140564
-Geracao do codigo de comando SENAO: [Ljava.lang.String;@58ceff1
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
+Geracao do codigo de comando SENAO: senao 
 Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
-Geracao comando WRITE: [Ljava.lang.String;@7c30a502
+Geracao comando WRITE: escreva 99
 Geracao de codigo de expressao 
-Geracao do codigo de termino de comando condicional FIMSE: [Ljava.lang.String;@49e4cb85
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
+Geracao do codigo de comando SENAO: senao 
+Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
+Geracao comando WRITE: escreva 99
+Geracao de codigo de expressao 
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
+Geracao do codigo de comando SENAO: senao 
+Geracao de codigo de geracao de rotulo para comandos de repeticao ou condicional
+Geracao comando WRITE: escreva 99
+Geracao de codigo de expressao 
+Geracao do codigo de termino de comando condicional FIMSE: fimse 
 
 
-Inicio Log Codigo Final MEPA
+Fim Log Codigo Final MEPA

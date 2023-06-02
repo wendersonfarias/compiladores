@@ -167,7 +167,7 @@ public class Compilador {
 						logEscreverConsole.add("Inicio Log Codigo Final MEPA");
 						logEscreverConsole.addAll(logCodigoFinal);
 						logEscreverConsole.add("\n");
-						logEscreverConsole.add("Inicio Log Codigo Final MEPA");
+						logEscreverConsole.add("Fim Log Codigo Final MEPA");
 						
 					}
 				}

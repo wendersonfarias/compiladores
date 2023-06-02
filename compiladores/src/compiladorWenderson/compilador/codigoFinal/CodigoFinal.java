@@ -43,13 +43,13 @@ public class CodigoFinal {
             if (!comando.substring(0, 4).equals("_Var")) {
                 if(linha[0].equals("leia")){
     				Integer posicaoDaTabela = tabelaVariaveis.indexOf(linha[1]);
-					logCodigoFinal.add("Geracao comando READ: " + linha);
+					logCodigoFinal.add("Geracao comando READ: " + comando);
 					gerarCodigoFinal("READ "+ identacao + "leia");
 					gerarCodigoFinal("STVL 0," + posicaoDaTabela 
 					+ identacao +"carregue valor no endereco de memoria 0," + posicaoDaTabela);
 
 				}else if(linha[0].equals("escreva")){
-					logCodigoFinal.add("Geracao comando WRITE: " + linha);
+					logCodigoFinal.add("Geracao comando WRITE: " + comando);
 					
 					ArrayList<String> buffer = new ArrayList<String>();
 					for (int i = 1; i < linha.length; i++) {
@@ -59,7 +59,7 @@ public class CodigoFinal {
 					gerarCodigoExpressao(buffer);
 					gerarCodigoFinal("PRNT escreva");
 				}else if(linha[0].equals("se")){
-					logCodigoFinal.add("Geracao do codigo de comando condicional SE: " + linha);
+					logCodigoFinal.add("Geracao do codigo de comando condicional SE: " + comando);
 					rotulo = obterRotulo();
 					Rotulo.push(rotulo);
 
@@ -106,18 +106,18 @@ public class CodigoFinal {
 					codigoFinal.add("JMPF " + rotulo + identacao +"pula se falso");
 
 				}else if(linha[0].equals("senao")){
-					logCodigoFinal.add("Geracao do codigo de comando SENAO: " + linha);
+					logCodigoFinal.add("Geracao do codigo de comando SENAO: " + comando);
 					rotulo = obterRotulo();
 					codigoFinal.add("JUMP " + rotulo + identacao + "pula para o fim do senao");
 					codigoFinal.add(Rotulo.pop() + ": NOOP " + identacao + " senao"); 
 					Rotulo.push(rotulo);
 				}
 				else if(linha[0].equals("fimse")){
-					logCodigoFinal.add("Geracao do codigo de termino de comando condicional FIMSE: " + linha);
+					logCodigoFinal.add("Geracao do codigo de termino de comando condicional FIMSE: " + comando);
 					rotulo = Rotulo.pop();
 					codigoFinal.add(rotulo + ": NOOP" +identacao + "fimse"); 
 				}else if(linha[0].equals("enquanto")){
-					logCodigoFinal.add("Geracao do codigo de comando de repeticao ENQUANTO: " + linha);
+					logCodigoFinal.add("Geracao do codigo de comando de repeticao ENQUANTO: " + comando);
 					rotulo = obterRotulo();
 					Rotulo.push(rotulo);
 					codigoFinal.add(rotulo + ": NOOP"  + identacao + "enquanto");
@@ -162,13 +162,13 @@ public class CodigoFinal {
 					}
 
 				}else if(linha[0].equals("fimenquanto")){
-					logCodigoFinal.add("Geracao do codigo de termino de comando repeticao FIMENQUANTO: " + linha);
+					logCodigoFinal.add("Geracao do codigo de termino de comando repeticao FIMENQUANTO: " + comando);
 					rotulo = Rotulo.pop();
 					codigoFinal.add("JMPF " + rotulo +   identacao +"fim_enquanto");
 				}else if(linha[1].equals("=")){
 					Integer posicaoDaTabela = tabelaVariaveis.indexOf(linha[0]);
 					
-					logCodigoFinal.add("Geracao do codigo de comando Atribuicao: " + linha);
+					logCodigoFinal.add("Geracao do codigo de comando Atribuicao: " + comando);
 					
 					ArrayList<String> buffer = new ArrayList<String>();
 					for (int i = 2; i < linha.length; i++) {
