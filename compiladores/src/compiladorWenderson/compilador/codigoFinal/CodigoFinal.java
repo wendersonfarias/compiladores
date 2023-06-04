@@ -117,6 +117,8 @@ public class CodigoFinal {
 					rotulo = Rotulo.pop();
 					codigoFinal.add(rotulo + ": NOOP" +identacao + "fimse"); 
 				}else if(linha[0].equals("enquanto")){
+					
+		
 					logCodigoFinal.add("Geracao do codigo de comando de repeticao ENQUANTO: " + comando);
 					rotulo = obterRotulo();
 					Rotulo.push(rotulo);
@@ -160,11 +162,17 @@ public class CodigoFinal {
 					}else if(linha[operadorLogico].equals(">=")){
 						gerarCodigoFinal("GEQU"  + identacao + "compara maior ou igual");
 					}
+					rotulo = obterRotulo();
+					Rotulo.add(rotulo);
+					gerarCodigoFinal("JMPF " + rotulo +   identacao +"fim_enquanto");
+					
 
 				}else if(linha[0].equals("fimenquanto")){
-					logCodigoFinal.add("Geracao do codigo de termino de comando repeticao FIMENQUANTO: " + comando);
 					rotulo = Rotulo.pop();
-					codigoFinal.add("JMPF " + rotulo +   identacao +"fim_enquanto");
+					logCodigoFinal.add("Geracao do codigo de termino de comando repeticao FIMENQUANTO: " + comando);
+					gerarCodigoFinal("JUMP " + Rotulo.pop() +   identacao +"enquanto");
+					codigoFinal.add(rotulo + ": NOOP"+ identacao + "fimenquanto");
+					
 				}else if(linha[1].equals("=")){
 					Integer posicaoDaTabela = tabelaVariaveis.indexOf(linha[0]);
 					
@@ -210,13 +218,13 @@ public class CodigoFinal {
 		for (String item : expressao) {
 			if(item.matches("[a-zA-Z]+")) {
 				Integer posicaoDaTabela = tabelaVariaveis.indexOf(item);
-				gerarCodigoFinal("LDVL 0,"+  posicaoDaTabela  + identacao + "carrega o valor da variavel " + item );
+				gerarCodigoFinal("LDVL 0,"+  posicaoDaTabela  + identacao + "    carrega o valor da variavel " + item );
 			}else if(item.matches("[0-9]+")){
-				gerarCodigoFinal("LDCT " + item +   identacao + "carrega o valor da constante " + item);
+				gerarCodigoFinal("LDCT " + item +   identacao + "    carrega o valor da constante " + item);
 			}else if(item.equals("+")){
-				gerarCodigoFinal("ADDD"  + identacao + "soma");
+				gerarCodigoFinal("ADDD"  + identacao + "    soma");
 			}else if(item.equals("-")){
-				gerarCodigoFinal("SUBT" + "subtrai");
+				gerarCodigoFinal("SUBT" + identacao + "    subtrai");
 			}
 			else if(item.equals("*")){
 				gerarCodigoFinal("MULT"  + identacao + "multiplica");

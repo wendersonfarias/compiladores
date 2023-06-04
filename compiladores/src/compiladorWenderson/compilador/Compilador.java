@@ -195,7 +195,7 @@ public class Compilador {
 		
 		bw.close();
 		
-		OutputStream fos1 = new FileOutputStream("saida_codigo_final.txt");   
+		OutputStream fos1 = new FileOutputStream("mepa/saida_codigo_final.mepa");   
 		Writer osw1 = new OutputStreamWriter(fos1);
 		BufferedWriter bw1 = new BufferedWriter(osw1);
 		

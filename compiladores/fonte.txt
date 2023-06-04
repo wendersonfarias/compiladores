@@ -1,45 +1,30 @@
 iniciop
+var linhas;
+var iterador;
+var j;
+var coeficiente;
+var pulaLinha;
+pulaLinha = 0 - 9;
 
-var A;
-var B;
-var C;
+leia(linhas);
 
-leia(A);
-leia(B);
-leia(C);
+iterador = 0;
 
-	se( A + B  > C) ENTAO 
-		SE(A + C > B) ENTAO
-			SE(B + C > A) ENTAO
-			
-				se( A == B ) ENTAO
-					SE( A == C ) ENTAO
-						ESCREVA(1);  // É um triângulo equilátero
-					FIMSE;
-				SENAO
-					SE(A == C) ENTAO
-						ESCREVA(2);  // É um triângulo isósceles
-					SENAO
-						 SE(B == C) ENTAO
-						 	ESCREVA(2);  // É um triângulo isósceles
-						 SENAO
-						 	ESCREVA(3);  // É um triângulo escaleno
-						 FIMSE;
-					FIMSE;
-					
-					
-				FIMSE;
-			
-			senao
-				escreva(99); //nao e triangulo
-			
-			fimse;
-			
-		senao
-			escreva(99); //nao e triangulo	
-		fimse;
-	senao
-		escreva(99); //nao e triangulo
-	fimse;
+laco(iterador < linhas) faca
+    j = 0;
+    coeficiente = 1;
 
+    laco(j <= iterador) faca
+        escreva(coeficiente);
+		
+        coeficiente = coeficiente * (iterador - j) / (j + 1);
+
+        j = j + 1;
+    fimlaco;
+
+    escreva(pulaLinha);
+
+    iterador = iterador + 1;
+fimlaco;
+var wr;
 fimp

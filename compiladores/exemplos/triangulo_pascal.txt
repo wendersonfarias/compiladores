@@ -1,32 +1,30 @@
 iniciop
-
-
-
-var linhaAtual;
-linhaAtual = 0;
-
+var linhas;
+var iterador;
+var j;
 var coeficiente;
+var pulaLinha;
+pulaLinha = 0 - 9;
 
-var posicaoAtual;
-posicaoAtual = 0;
+leia(linhas);
 
+iterador = 0;
 
-var numeroLinhas;
-leia(numeroLinhas);
+laco(iterador < linhas) faca
+    j = 0;
+    coeficiente = 1;
 
-	laco ( linhaAtual < numeroLinhas ) FACA
-		coeficiente = 1;
+    laco(j <= iterador) faca
+        escreva(coeficiente);
 		
-		laco ( posicaoAtual <= linhaAtual ) FACA
-			escreva(coeficiente);
-			coeficiente = coeficiente * (linhaAtual - posicaoAtual) / (posicaoAtual + 1);
-			
-		FIMLACO;
-		//calcula o coeficiente binomial para cada número da linha, 
-		//com base nos coeficientes anteriores.
-		
-		linhaAtual = linhaAtual + 1;
-		
-		escreva(0);
-	FIMLACO;
+        coeficiente = coeficiente * (iterador - j) / (j + 1);
+
+        j = j + 1;
+    fimlaco;
+
+    escreva(pulaLinha);
+
+    iterador = iterador + 1;
+fimlaco;
+var wr;
 fimp
