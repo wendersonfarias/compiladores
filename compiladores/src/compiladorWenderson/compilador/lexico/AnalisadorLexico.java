@@ -143,8 +143,8 @@ public class AnalisadorLexico {
 		}
 		else { 
 			imprimeErro(this.getNumeroLinha(), cabeca, letra);
-			this.setLexema("");
-			this.estadoQ0();
+			
+			return ;
 		}
 	}
 
@@ -2009,16 +2009,16 @@ public class AnalisadorLexico {
 	}
 	
 	public void imprimeErro(Integer numeroLinha,Integer coluna,String caractere ) {
-		System.out.println("Erro L�xico ( Linha: " +  numeroLinha + " - Coluna: " 
-				+ ((coluna -1)  +tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
+		System.out.println("Erro Lexico ( Linha: " +  numeroLinha + " - Coluna: " 
+				+ ((coluna )  +tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
 		erroLexico = true;
 		setCabeca(getCabeca() - 1);
-		this.estadoQ0();
+		//this.estadoQ0();
 	}
 
 	
 	public void salvaToken(String token_, String lexema, Integer numeroLinha, Integer coluna) {
-		String linhaColuna = "(L"+ numeroLinha + " - C" + ((coluna-1) - lexema.length()+tabulacao) + " )";
+		String linhaColuna = "(L"+ numeroLinha + " - C" + ((coluna) - lexema.length()+tabulacao) + " )";
 		Token token = new Token(token_, lexema, linhaColuna);
 		tokens.add(token);
 	
