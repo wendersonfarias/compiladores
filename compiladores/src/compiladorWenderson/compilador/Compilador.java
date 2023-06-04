@@ -21,6 +21,7 @@ public class Compilador {
 
 	public static void main(String[] args) throws IOException {
 		String arquivo = ""  ;
+		String arquivoSaida = ""  ;
 		Boolean listarLogTokens = false;
 		Boolean listarLogSintatico = false;
 		Boolean listarLogSemantico = false;
@@ -55,7 +56,13 @@ public class Compilador {
             	
             }else {
             	arquivo = "fonte.txt";
-            }      
+            }  
+            
+            if(arg.contains("mepa")) {
+            arquivoSaida = "mepa/" + arg;
+           }else {
+        	   arquivoSaida = "mepa/saida_codigo_final.mepa";
+           }
         }
 
 		try {
@@ -195,7 +202,7 @@ public class Compilador {
 		
 		bw.close();
 		
-		OutputStream fos1 = new FileOutputStream("mepa/saida_codigo_final.mepa");   
+		OutputStream fos1 = new FileOutputStream(arquivoSaida);   
 		Writer osw1 = new OutputStreamWriter(fos1);
 		BufferedWriter bw1 = new BufferedWriter(osw1);
 		
