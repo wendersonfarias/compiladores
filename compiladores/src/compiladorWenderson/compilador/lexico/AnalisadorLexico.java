@@ -189,7 +189,6 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
-			this.estadoQ0();
 		}
 		
 	}
@@ -233,7 +232,7 @@ public class AnalisadorLexico {
 			salvaToken(token, getLexema(), getNumeroLinha(), getCabeca()); 
 			this.setLexema("");
 			setCabeca(getCabeca() - 1); 
-			this.estadoQ0();
+			
 		}
 		
 		
@@ -2013,6 +2012,7 @@ public class AnalisadorLexico {
 				+ ((coluna )  +tabulacao) +"): Caracter { "  + caractere +  " } Inesperado \n ");
 		erroLexico = true;
 		setCabeca(getCabeca() - 1);
+		return;
 		//this.estadoQ0();
 	}
 

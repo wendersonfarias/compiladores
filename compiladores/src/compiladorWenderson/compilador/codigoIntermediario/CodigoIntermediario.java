@@ -80,7 +80,7 @@ public class CodigoIntermediario {
 					 		listaToken.get(i).getToken().equals(">=") || listaToken.get(i).getToken().equals(">") || 
 					 		listaToken.get(i).getToken().equals("==") ) {
 					 		expressao = infix_posfix.InFixToPosFix(expressao2) + " " + listaToken.get(i).getLexema() + " " ;
-					 		expressao2 = expressao;
+					 		expressao2 = "";
 					 		
 					 	}else {
 					 		
@@ -89,9 +89,12 @@ public class CodigoIntermediario {
 
 						++i;
 				}
-				String[] expressao3 = expressao2.split("\\)");
-				comando = comando  + expressao3[0] + "";
-				codigoIntermediario.add(comando);
+				String[] express = expressao2.split("\\)");
+				
+				expressao2 = infix_posfix.InFixToPosFix(express[0]);
+				 String expressaoGeral = expressao + expressao2;
+				 comando = comando  + expressaoGeral ;
+				 codigoIntermediario.add(comando);
 				registarLog.add("Reconhecido comando repecitao (enquanto)");
 			}else if(listaToken.get(i).getToken().equals("fimlaco")) {
 				comando = "fimenquanto ";
@@ -108,7 +111,7 @@ public class CodigoIntermediario {
 					 		listaToken.get(i).getToken().equals(">=") || listaToken.get(i).getToken().equals(">") || 
 					 		listaToken.get(i).getToken().equals("==") ) {
 					 		expressao = infix_posfix.InFixToPosFix(expressao2) + " " + listaToken.get(i).getLexema() + " "  ;
-					 		expressao2 = expressao;
+					 		expressao2 = "";
 					 		
 					 	}else {
 					 		
@@ -117,9 +120,12 @@ public class CodigoIntermediario {
 
 						++i;
 				 }
-				 String[] expressao3 = expressao2.split("\\)");
-				 comando = comando  + expressao3[0] ;
-				 codigoIntermediario.add(comando);
+				 String[] express = expressao2.split("\\)");
+					
+					expressao2 = infix_posfix.InFixToPosFix(express[0]);
+					 String expressaoGeral = expressao + expressao2;
+					 comando = comando  + expressaoGeral ;
+					 codigoIntermediario.add(comando);
 				 registarLog.add("Reconhecido comando condicional (se entao) ");
 			}else if(listaToken.get(i).getToken().equals("senao")) {
 				 comando = "senao ";

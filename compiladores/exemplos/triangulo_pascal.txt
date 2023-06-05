@@ -1,4 +1,4 @@
-iniciop
+iniciop 
 var linhas;
 var iterador;
 var j;
@@ -11,6 +11,7 @@ leia(linhas);
 iterador = 0;
 
 laco(iterador < linhas) faca
+var teste;
     j = 0;
     coeficiente = 1;
 

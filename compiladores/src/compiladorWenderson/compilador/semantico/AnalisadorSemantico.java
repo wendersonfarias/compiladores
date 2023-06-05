@@ -185,14 +185,17 @@ public class AnalisadorSemantico {
 	 * @param buffer O StringBuilder utilizado para construir a expressão acumulada.
 	 */
 	private void verificaExpressao(StringBuilder buffer) {
-        while (!getListaToken().get(indice).getToken().equals(";")) {
+        while (!getListaToken().get(indice).getToken().equals(";") && !erroSemantico) {
             var lexeme = getListaToken().get(indice).getLexema();
             if (isVazio(lexeme)) {
             	verificaVariavelNaoDeclarada(getListaToken().get(indice));
-                final boolean hasValue = tabelaSimbolos.get(lexeme);
-                buffer.append(hasValue ? lexeme : "0"); //Se tiver valor concatena o lexema, senão concatena 0.
-            }
-            else {
+            	if(!erroSemantico) {
+	                final boolean hasValue = tabelaSimbolos.get(lexeme);
+	                buffer.append(hasValue ? lexeme : "0"); //Se tiver valor concatena o lexema, senão concatena 0.
+            
+            	}
+           
+            }else {
                 buffer.append(lexeme);
             }
             indice++;
@@ -238,11 +241,14 @@ public class AnalisadorSemantico {
 
 	private void verificaVariavelNaoDeclarada(Token tokenAtual) {
 	    if (!variavelDeclarada(tokenAtual)) {
+	    	System.out.println("** \tErro Semantico!                           **");
 	    	System.out.println("A variavel '" + tokenAtual.getLexema() + "' não foi declarada "
 	    			+ "anteriormente, " + tokenAtual.getLinhaColuna());
 	    	erroSemantico = true;
 	    	System.out.println("** Nao eh possivel continuar a analise semantica! **");
         	System.out.println("** Corrija os erros! e tente novamente.           **");
+        
+        	return ;
 	    }
 	}
 	

@@ -88,7 +88,7 @@ entao		= identificador : "entao"
 <declaracao>::= var identificador
 ;
 //Laco enquanto
-<declaracao>::= laco <expressao_logica>  faca <declaracao_recursiva> fimlaco
+<declaracao>::= laco <expressao_logica> faca <declaracao_recursiva> fimlaco
 
 ;
 
